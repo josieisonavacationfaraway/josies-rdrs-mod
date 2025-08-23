@@ -45,9 +45,8 @@ let TayrisMongardiUK7 = new Queen("Tayris Mongardi", 7, 7, 7, 7, 7, 7, 7, "https
 let ViolaUK7 = new Queen("Viola", 7, 7, 7, 7, 7, 7, 7, "https://static.wikia.nocookie.net/logosrupaulsdragrace/images/7/7d/ViolaDRUK7CastMug.jpg", true);
 
 let UK7_Cast = [BonesUK7, BonnieAnnClydeUK7, CatrinFeelingsUK7, ChaiTGrandeUK7, ElleVosqueUK7, NyongbellaUK7, PaigeThreeUK7, PastyUK7, SallyTMUK7, SilllexaDictionUK7, TayrisMongardiUK7, ViolaUK7];
-UK7_Cast .forEach(q => addQueenToAll(q));
 
-// - SLAYSIAN ROYALE IMAGES + CAST - //
+// - SLAYSIAN ROYALE IMAGES + CAST + SCREEN - //
 arizona.customqueen = true;
 arizona.image = "https://static.wikia.nocookie.net/logosrupaulsdragrace/images/9/95/ArizonaBrandyDRPHSR1CastMug.jpg";
 bernie.customqueen = true;
@@ -73,4 +72,73 @@ vinas.image = "https://static.wikia.nocookie.net/logosrupaulsdragrace/images/6/6
 yuhua.customqueen = true;
 yuhua.image = "https://static.wikia.nocookie.net/logosrupaulsdragrace/images/a/a3/YuhuaDRPHSR1CastMug.jpg";
 
-let SLAYSIAN_CAST= [arizona, bernie, brigiding, ivory, khianna, kittyS, yoko, siam, suki, sumting, vinas, yuhua]; 
+let SLAYSIAN_Cast = [arizona, bernie, brigiding, ivory, khianna, kittyS, yoko, siam, suki, sumting, vinas, yuhua]; 
+
+// - PAGE EXCLUSIVE - //
+if (window.location.pathname.endsWith("index.html")) {
+	UK7_Cast .forEach(q => addQueenToAll(q));
+}
+
+if (window.location.pathname.endsWith("predef.html")) {
+    // --- Philippines: Slaysian Royale ---
+    const philippinesDiv = Array.from(document.querySelectorAll("div.content-tab")).find(div =>
+        div.querySelector("h2 img[src*='PhilippinesFlag']")
+    );
+
+    if (philippinesDiv) {
+        const newHeader = document.createElement("h2");
+        newHeader.innerHTML = `
+            <img src="image/flags/StarFlag.webp" class="countryFlag">
+            <img src="image/flags/PhilippinesFlag.webp" class="countryFlag">
+            Drag Race Philippines: Slaysian Royale
+            <img src="image/flags/PhilippinesFlag.webp" class="countryFlag">
+            <img src="image/flags/StarFlag.webp" class="countryFlag">
+        `;
+
+        const newSeasons = document.createElement("div");
+        newSeasons.className = "content-seasons";
+        newSeasons.style.gridTemplateAreas = "'a'";
+        newSeasons.style.gridTemplateColumns = "1fr";
+
+        const newSeason = document.createElement("div");
+        newSeason.className = "content-season";
+        newSeason.innerHTML = `
+            <h3 class="content-season-title">PH Slaysian Royale</h3>
+            <button onclick="predefCast(SLAYSIAN_Cast, 'all-stars', 'LFTC')">Simulate</button>
+            <div class="content-season_overlay" aria-hidden="true" id="phslaysian"
+                style="background: linear-gradient(-10deg, rgba(247, 25, 154, 0.6) 15%, rgba(235, 13, 187, 0.6) 100%) 
+                center center / cover no-repeat, 
+                url('https://static.wikia.nocookie.net/logosrupaulsdragrace/images/1/19/DRPHSR1Logo2.jpg');">
+            </div>
+        `;
+
+        newSeasons.appendChild(newSeason);
+        philippinesDiv.appendChild(newHeader);
+        philippinesDiv.appendChild(newSeasons);
+    }
+
+    // --- UK: Season 7 ---
+    const ukDiv = Array.from(document.querySelectorAll("div.content-tab")).find(div =>
+        div.querySelector("h2 img[src*='UKFlag']")
+    );
+
+    if (ukDiv) {
+        const ukSeasons = ukDiv.querySelector(".content-seasons");
+
+        if (ukSeasons) {
+            const newSeason = document.createElement("div");
+            newSeason.className = "content-season";
+            newSeason.innerHTML = `
+                <h3 class="content-season-title">UK Season 7</h3>
+                <button onclick="predefCast(UK7_Cast, 'regular', 'teamsF', 'par-premiere')">Simulate</button>
+                <div class="content-season_overlay" aria-hidden="true" id="ukseason7" 
+                    style="background: linear-gradient(-10deg, rgba(247, 25, 154, 0.6) 15%, rgba(235, 13, 187, 0.6) 100%) 
+                    center center / cover no-repeat, 
+                    url('https://static.wikia.nocookie.net/logosrupaulsdragrace/images/2/22/RDRUK7.jpg');">
+                </div>
+            `;
+
+            ukSeasons.appendChild(newSeason);
+        }
+    }
+}
