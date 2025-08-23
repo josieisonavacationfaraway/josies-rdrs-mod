@@ -46,7 +46,120 @@ let ViolaUK7 = new Queen("Viola", 7, 7, 7, 7, 7, 7, 7, "https://static.wikia.noc
 
 let UK7_Cast = [BonesUK7, BonnieAnnClydeUK7, CatrinFeelingsUK7, ChaiTGrandeUK7, ElleVosqueUK7, NyongbellaUK7, PaigeThreeUK7, PastyUK7, SallyTMUK7, SilllexaDictionUK7, TayrisMongardiUK7, ViolaUK7];
 
-// - SLAYSIAN ROYALE IMAGES + CAST + SCREEN - //
+// - SEASON 17 STAT UPDATES //
+onya._actingStat = 14;
+onya._comedyStat = 12;
+onya._danceStat = 10;
+onya._designStat = 7;
+onya._improvStat = 12;
+onya._runwayStat = 9;
+onya._lipsyncStat = 10;
+
+samStar._actingStat = 11;
+samStar._comedyStat = 11;
+samStar._danceStat = 10;
+samStar._designStat = 13;
+samStar._improvStat = 10;
+samStar._runwayStat = 13;
+samStar._lipsyncStat = 11;
+
+suzie._actingStat = 13;
+suzie._comedyStat = 9;
+suzie._danceStat = 11;
+suzie._designStat = 8;
+suzie._improvStat = 8;
+suzie._runwayStat = 10;
+suzie._lipsyncStat = 10;
+
+jewels._actingStat = 7;
+jewels._comedyStat = 8;
+jewels._danceStat = 12;
+jewels._designStat = 11;
+jewels._improvStat = 9;
+jewels._runwayStat = 13;
+jewels._lipsyncStat = 12;
+
+crystalE._actingStat = 8;
+crystalE._comedyStat = 6;
+crystalE._danceStat = 10;
+crystalE._designStat = 10;
+crystalE._improvStat = 6;
+crystalE._runwayStat = 13;
+crystalE._lipsyncStat = 10;
+
+lexi._actingStat = 7;
+lexi._comedyStat = 6;
+lexi._danceStat = 10;
+lexi._designStat = 9;
+lexi._improvStat = 6;
+lexi._runwayStat = 13;
+lexi._lipsyncStat = 12;
+
+acacia._actingStat = 9;
+acacia._comedyStat = 8;
+acacia._danceStat = 6;
+acacia._designStat = 6;
+acacia._improvStat = 8;
+acacia._runwayStat = 8;
+acacia._lipsyncStat = 8;
+
+lydia._actingStat = 5;
+lydia._comedyStat = 10;
+lydia._danceStat = 7;
+lydia._designStat = 8;
+lydia._improvStat = 7;
+lydia._runwayStat = 12;
+lydia._lipsyncStat = 11;
+
+hormona._actingStat = 9;
+hormona._comedyStat = 6;
+hormona._danceStat = 6;
+hormona._designStat = 8;
+hormona._improvStat = 6;
+hormona._runwayStat = 8;
+hormona._lipsyncStat = 7;
+
+kori._actingStat = 6;
+kori._comedyStat = 8;
+kori._danceStat = 8;
+kori._designStat = 5;
+kori._improvStat = 8;
+kori._runwayStat = 7;
+kori._lipsyncStat = 12;
+
+lana._actingStat = 8;
+lana._comedyStat = 7;
+lana._danceStat = 8;
+lana._designStat = 7;
+lana._improvStat = 5;
+lana._runwayStat = 10;
+lana._lipsyncStat = 11;
+
+arrietty._actingStat = 4;
+arrietty._comedyStat = 4;
+arrietty._danceStat = 5;
+arrietty._designStat = 15;
+arrietty._improvStat = 4;
+arrietty._runwayStat = 15;
+arrietty._lipsyncStat = 5;
+
+joella._actingStat = 5;
+joella._comedyStat = 4;
+joella._danceStat = 5;
+joella._designStat = 5;
+joella._improvStat = 4;
+joella._runwayStat = 6;
+joella._lipsyncStat = 6;
+
+lucky._actingStat = 4;
+lucky._comedyStat = 4;
+lucky._danceStat = 5;
+lucky._designStat = 4;
+lucky._improvStat = 4;
+lucky._runwayStat = 8;
+lucky._lipsyncStat = 5;
+
+// - SLAYSIAN ROYALE IMAGES + CAST + SCREEN + STATS - //
 arizona.customqueen = true;
 arizona.image = "https://static.wikia.nocookie.net/logosrupaulsdragrace/images/9/95/ArizonaBrandyDRPHSR1CastMug.jpg";
 bernie.customqueen = true;
