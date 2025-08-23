@@ -130,7 +130,7 @@ if (window.location.pathname.endsWith("predef.html")) {
             newSeason.className = "content-season";
             newSeason.innerHTML = `
                 <h3 class="content-season-title">UK Season 7</h3>
-                <button onclick="predefCast(UK7_Cast, 'regular', 'teamsF', 'par-premiere')">Simulate</button>
+                <button onclick="predefCast(UK7_Cast, 'regular', 'teams', 'par-premiere')">Simulate</button>
                 <div class="content-season_overlay" aria-hidden="true" id="ukseason7" 
                     style="background: linear-gradient(-10deg, rgba(247, 25, 154, 0.6) 15%, rgba(235, 13, 187, 0.6) 100%) 
                     center center / cover no-repeat, 
