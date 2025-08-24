@@ -280,7 +280,7 @@ if (window.location.pathname.endsWith("predef.html")) {
 
 	// --- AS: Season 10 ---
 	const asDiv = Array.from(document.querySelectorAll("div.content-tab")).find(div =>
-        div.querySelector("h2 img[src*='StarFlag' All Stars]")
+        div.querySelector("h2 img[src*='StarFlag'] All Stars img[src*='StarFlag']")
     );
 
 	if (asDiv) {
