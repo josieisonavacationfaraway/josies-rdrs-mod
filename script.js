@@ -187,6 +187,9 @@ yuhua.image = "https://static.wikia.nocookie.net/logosrupaulsdragrace/images/a/a
 
 let SLAYSIAN_Cast = [arizona, bernie, brigiding, ivory, khianna, kittyS, yoko, siam, suki, sumting, vinas, yuhua]; 
 
+// - ALL STARS 11 - //
+let AS10_Cast = [akeria, dawn, lucky, morgan, morphine, mystique, april, auraMayari, crystal, salina, silky, vivacious, hershii, jasmineK, joey, kennedy, samStar, shuga]
+
 // - PAGE EXCLUSIVE - //
 document.addEventListener("DOMContentLoaded", () => {
     const optionsBox = document.querySelector(".options");
@@ -274,4 +277,29 @@ if (window.location.pathname.endsWith("predef.html")) {
             ukSeasons.appendChild(newSeason);
         }
     }
+
+	// --- AS: Season 10 ---
+	const asDiv = Array.from(document.querySelectorAll("div.content-tab")).find(div =>
+        div.querySelector("h2 img[src*='StarFlag' All Stars]")
+    );
+
+	if (asDiv) {
+		const asSeasons = asDiv.querySelector(".content-seasons");
+
+		if (asSeasons) {
+			const newSeason = document.createElement("div");
+            newSeason.className = "content-season";
+            newSeason.innerHTML = `
+                <h3 class="content-season-title">ALL STARS SEASON 11</h3>
+                <button onclick="predefCast(AS10_Cast, 'all-stars', 'LFTC')">Simulate</button>
+                <div class="content-season_overlay" aria-hidden="true" id="asseason10" 
+                    style="background: linear-gradient(-10deg, rgba(247, 25, 154, 0.6) 15%, rgba(235, 13, 187, 0.6) 100%) 
+                    center center / cover no-repeat, 
+                    url('https://static.wikia.nocookie.net/logosrupaulsdragrace/images/0/0e/RDRAScomingsoon.png');">
+                </div>
+            `;
+
+            asSeasons.appendChild(newSeason);
+		}
+	}
 }
