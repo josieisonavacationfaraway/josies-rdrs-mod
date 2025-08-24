@@ -188,6 +188,26 @@ yuhua.image = "https://static.wikia.nocookie.net/logosrupaulsdragrace/images/a/a
 let SLAYSIAN_Cast = [arizona, bernie, brigiding, ivory, khianna, kittyS, yoko, siam, suki, sumting, vinas, yuhua]; 
 
 // - PAGE EXCLUSIVE - //
+document.addEventListener("DOMContentLoaded", () => {
+    const optionsBox = document.querySelector(".options");
+
+    if (optionsBox) {
+        const chocolateSection = optionsBox.querySelector("#chocolateBar")?.closest("div.aoitem");
+        
+        if (chocolateSection) {
+            const badunkOption = document.createElement("p");
+            badunkOption.innerHTML = `<input type="checkbox" id="tank2"> Badunkadunk Tank`;
+
+            const choosable = chocolateSection.querySelector("#chocolateBarChoosable")?.parentElement;
+            if (choosable) {
+                choosable.insertAdjacentElement("afterend", badunkOption);
+            } else {
+                chocolateSection.appendChild(badunkOption);
+            }
+        }
+    }
+});
+
 if (window.location.pathname.endsWith("index.html")) {
 	UK7_Cast .forEach(q => addQueenToAll(q));
 }
