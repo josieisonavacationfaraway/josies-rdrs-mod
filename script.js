@@ -30,138 +30,19 @@ function downloadTR() {
     });
 }
 
-class Queen {
-    constructor(name, acting, comedy, dance, design, improv, runway, lipsync, image = "noimage", custom = false, thirdpmug = false) {
-        this.trackRecord = [];
-        this.friends = [];
-        this.allies = [];
-        this.enemies = [];
-        this.sisters = [];
-        this.miniEpisode = [];
-        this.gftdS = [];
-        this.tCaptain = [];
-        this.voteHerstory = [];
-        this.immuneEp = [];
-        this.runwayScore = 0;
-        this.lipsyncScore = 0;
-        this.performanceScore = 0;
-        this.finaleScore = 0;
-        this.favoritism = 0;
-        this.unfavoritism = 0;
-        this.ppe = 0;
-        this.stars = 0;
-        this.episodesOn = 0;
-        this.votes = 0;
-        this.rankP = 0;
-        this.retEp = 0;
-        this.ogPlace = 0;
-        this.minqdd = 0;
-        this.blocked = false;
-        this.queenDisqOrDept = false;
-        this.customqueen = false;
-        this.immune = false;
-        this.immPotion = false;
-        this.chocolate = false;
-        this.maxiT = false;
-        this._tpm = thirdpmug;
-
-        this._name = name;
-        this._actingStat = acting;
-        this._comedyStat = comedy;
-        this._danceStat = dance;
-        this._designStat = design;
-        this._improvStat = improv;
-        this._runwayStat = runway;
-        this._lipsyncStat = lipsync;
-
-        if (image === "noimage") {
-            this.image = "image/queens/noimage.jpg";
-        } else if (custom === true || this._tpm === true) {
-            this.image = image;
-        } else {
-            this.image = "image/queens/" + image + ".webp";
-        }
-    }
-    _calculateScores(min, max, stat = 0) {
-        let score = randomNumber(min, max);
-        return score - stat;
-    }
-    getName() {
-        return this._name;
-    }
-    getLipSyncStat() {
-        return this._lipsyncStat;
-    }
-    getActing() {
-        this.performanceScore = this._calculateScores(15, 35, this._actingStat);
-    }
-    getComedy() {
-        this.performanceScore = this._calculateScores(15, 35, this._comedyStat);
-    }
-    getMarketing() {
-        this.performanceScore = this._calculateScores(25, 45, this._comedyStat + this._actingStat);
-    }
-    getDance() {
-        this.performanceScore = this._calculateScores(15, 35, this._danceStat);
-    }
-    getDesign() {
-        this.performanceScore = this._calculateScores(15, 35, this._designStat);
-    }
-    getRunwayChallenge() {
-        this.performanceScore = this._calculateScores(15, 35, this._runwayStat);
-    }
-    getImprov() {
-        this.performanceScore = this._calculateScores(15, 35, this._improvStat);
-    }
-    //special 'gets':
-    getSnatch() {
-        this.performanceScore = this._calculateScores(25, 45, this._improvStat + this._comedyStat);
-    }
-    getRusical() {
-        this.performanceScore = this._calculateScores(25, 45, this._danceStat + this._lipsyncStat);
-    }
-    getBall() {
-        this.performanceScore = this._calculateScores(25, 45, this._designStat + this._runwayStat);
-    }
-    getRumix() {
-        this.performanceScore = this._calculateScores(25, 45, this._danceStat + this._improvStat);
-    }
-    getTalentShow() {
-        this.performanceScore = this._calculateScores(15, 35, randomNumber(1, 35));
-    }
-    getFinale() {
-        this.finaleScore = this.favoritism - this.unfavoritism;
-    }
-    getRunway() {
-        this.runwayScore = this._calculateScores(12, 35, this._runwayStat);
-    }
-    getLipsync() {
-        this.lipsyncScore = this._calculateScores(0, this._lipsyncStat, this.unfavoritism) + this.favoritism;
-    }
-    getASLipsync() {
-        this.lipsyncScore = this._calculateScores(0, this._lipsyncStat);
-    }
-    addToTrackRecord(placement) {
-        this.trackRecord.push(placement);
-    }
-    editTrackRecord(added) {
-        this.trackRecord[this.trackRecord.length - 1] += added;
-    }
-}
-
 // - UK 7 CAST - //
-let BonesUK7 = new Queen("Bones", 7, 7, 7, 7, 7, 7, 7, "https://static.wikia.nocookie.net/logosrupaulsdragrace/images/a/ad/BonesDRUK7CastMug.jpg", false, true);
-let BonnieAnnClydeUK7 = new Queen("Bonnie Ann Clyde", 7, 7, 7, 7, 7, 7, 7, "https://static.wikia.nocookie.net/logosrupaulsdragrace/images/3/3d/BonnieAnnClydeDRUK7CastMug.jpg", false, true);
-let CatrinFeelingsUK7 = new Queen("Catrin Feelings", 7, 7, 7, 7, 7, 7, 7, "https://static.wikia.nocookie.net/logosrupaulsdragrace/images/5/57/CatrinFeelingsDRUK7CastMug.jpg", false, true);
-let ChaiTGrandeUK7 = new Queen("Chai T. Grande", 7, 7, 7, 7, 7, 7, 7, "https://static.wikia.nocookie.net/logosrupaulsdragrace/images/4/4c/ChaiTGrandeDRUK7CastMug.jpg", false, true);
-let ElleVosqueUK7 = new Queen("Elle Vosque", 7, 7, 7, 7, 7, 7, 7, "https://static.wikia.nocookie.net/logosrupaulsdragrace/images/1/1f/ElleVosqueDRUK7CastMug.jpg", false, true);
-let NyongbellaUK7 = new Queen("Nyongbella", 7, 7, 7, 7, 7, 7, 7, "https://static.wikia.nocookie.net/logosrupaulsdragrace/images/0/02/NyongbellaDRUK7CastMug.jpg", false, true);
-let PaigeThreeUK7 = new Queen("Paige Three", 7, 7, 7, 7, 7, 7, 7, "https://static.wikia.nocookie.net/logosrupaulsdragrace/images/3/3f/PaigeThreeDRUK7CastMug.jpg", false, true);
-let PastyUK7 = new Queen("Pasty", 7, 7, 7, 7, 7, 7, 7, "https://static.wikia.nocookie.net/logosrupaulsdragrace/images/b/bf/PastyDRUK7CastMug.jpg", false, true);
-let SallyTMUK7 = new Queen("Sally TM", 7, 7, 7, 7, 7, 7, 7, "https://static.wikia.nocookie.net/logosrupaulsdragrace/images/b/ba/SallyTMDRUK7CastMug.jpg", false, true);
-let SilllexaDictionUK7 = new Queen("Silllexa Diction", 7, 7, 7, 7, 7, 7, 7, "https://static.wikia.nocookie.net/logosrupaulsdragrace/images/c/cb/SilllexaDictionDRUK7CastMug.jpg", false, true);
-let TayrisMongardiUK7 = new Queen("Tayris Mongardi", 7, 7, 7, 7, 7, 7, 7, "https://static.wikia.nocookie.net/logosrupaulsdragrace/images/e/e9/TayrisMongardiDRUK7CastMug.jpg", false, true);
-let ViolaUK7 = new Queen("Viola", 7, 7, 7, 7, 7, 7, 7, "https://static.wikia.nocookie.net/logosrupaulsdragrace/images/7/7d/ViolaDRUK7CastMug.jpg", false, true);
+let BonesUK7 = new Queen("Bones", 7, 7, 7, 7, 7, 7, 7, "https://static.wikia.nocookie.net/logosrupaulsdragrace/images/a/ad/BonesDRUK7CastMug.jpg", true);
+let BonnieAnnClydeUK7 = new Queen("Bonnie Ann Clyde", 7, 7, 7, 7, 7, 7, 7, "https://static.wikia.nocookie.net/logosrupaulsdragrace/images/3/3d/BonnieAnnClydeDRUK7CastMug.jpg", true);
+let CatrinFeelingsUK7 = new Queen("Catrin Feelings", 7, 7, 7, 7, 7, 7, 7, "https://static.wikia.nocookie.net/logosrupaulsdragrace/images/5/57/CatrinFeelingsDRUK7CastMug.jpg", true);
+let ChaiTGrandeUK7 = new Queen("Chai T. Grande", 7, 7, 7, 7, 7, 7, 7, "https://static.wikia.nocookie.net/logosrupaulsdragrace/images/4/4c/ChaiTGrandeDRUK7CastMug.jpg", true);
+let ElleVosqueUK7 = new Queen("Elle Vosque", 7, 7, 7, 7, 7, 7, 7, "https://static.wikia.nocookie.net/logosrupaulsdragrace/images/1/1f/ElleVosqueDRUK7CastMug.jpg", true);
+let NyongbellaUK7 = new Queen("Nyongbella", 7, 7, 7, 7, 7, 7, 7, "https://static.wikia.nocookie.net/logosrupaulsdragrace/images/0/02/NyongbellaDRUK7CastMug.jpg", true);
+let PaigeThreeUK7 = new Queen("Paige Three", 7, 7, 7, 7, 7, 7, 7, "https://static.wikia.nocookie.net/logosrupaulsdragrace/images/3/3f/PaigeThreeDRUK7CastMug.jpg", true);
+let PastyUK7 = new Queen("Pasty", 7, 7, 7, 7, 7, 7, 7, "https://static.wikia.nocookie.net/logosrupaulsdragrace/images/b/bf/PastyDRUK7CastMug.jpg", true);
+let SallyTMUK7 = new Queen("Sally TM", 7, 7, 7, 7, 7, 7, 7, "https://static.wikia.nocookie.net/logosrupaulsdragrace/images/b/ba/SallyTMDRUK7CastMug.jpg", true);
+let SilllexaDictionUK7 = new Queen("Silllexa Diction", 7, 7, 7, 7, 7, 7, 7, "https://static.wikia.nocookie.net/logosrupaulsdragrace/images/c/cb/SilllexaDictionDRUK7CastMug.jpg", true);
+let TayrisMongardiUK7 = new Queen("Tayris Mongardi", 7, 7, 7, 7, 7, 7, 7, "https://static.wikia.nocookie.net/logosrupaulsdragrace/images/e/e9/TayrisMongardiDRUK7CastMug.jpg", true);
+let ViolaUK7 = new Queen("Viola", 7, 7, 7, 7, 7, 7, 7, "https://static.wikia.nocookie.net/logosrupaulsdragrace/images/7/7d/ViolaDRUK7CastMug.jpg", true);
 
 let UK7_Cast = [BonesUK7, BonnieAnnClydeUK7, CatrinFeelingsUK7, ChaiTGrandeUK7, ElleVosqueUK7, NyongbellaUK7, PaigeThreeUK7, PastyUK7, SallyTMUK7, SilllexaDictionUK7, TayrisMongardiUK7, ViolaUK7];
 
@@ -279,29 +160,29 @@ lucky._runwayStat = 8;
 lucky._lipsyncStat = 5;
 
 // - SLAYSIAN ROYALE IMAGES + CAST + SCREEN + STATS - //
-arizona._tpm = true;
+arizona.customqueen = true;
 arizona.image = "https://static.wikia.nocookie.net/logosrupaulsdragrace/images/9/95/ArizonaBrandyDRPHSR1CastMug.jpg";
-bernie._tpm = true;
+bernie.customqueen = true;
 bernie.image = "https://static.wikia.nocookie.net/logosrupaulsdragrace/images/4/48/BernieDRPHSR1CastMug.jpg";
-brigiding._tpm = true;
+brigiding.customqueen = true;
 brigiding.image = "https://static.wikia.nocookie.net/logosrupaulsdragrace/images/4/44/BrigidingDRPHSR1CastMug.jpg";
-ivory._tpm = true;
+ivory.customqueen = true;
 ivory.image = "https://static.wikia.nocookie.net/logosrupaulsdragrace/images/0/08/IvoryGlazeDRPHSR1CastMug.jpg";
-khianna._tpm = true;
+khianna.customqueen = true;
 khianna.image = "https://static.wikia.nocookie.net/logosrupaulsdragrace/images/6/6c/KhiannaDRPHSR1CastMug.jpg";
-kittyS._tpm = true;
+kittyS.customqueen = true;
 kittyS.image = "https://static.wikia.nocookie.net/logosrupaulsdragrace/images/7/7b/KittySpaceDRPHSR1CastMug.jpg";
-yoko._tpm = true;
+yoko.customqueen = true;
 yoko.image = "https://static.wikia.nocookie.net/logosrupaulsdragrace/images/1/13/MadameYokoDRPHSR1CastMug.jpg";
-siam._tpm = true;
+siam.customqueen = true;
 siam.image = "https://static.wikia.nocookie.net/logosrupaulsdragrace/images/d/dc/SiamPhusriDRPHSR1CastMug.jpg";
-suki._tpm = true;
+suki.customqueen = true;
 suki.image = "https://static.wikia.nocookie.net/logosrupaulsdragrace/images/7/7c/SukiDollDRPHSR1CastMug.jpg";
-sumting._tpm = true;
+sumting.customqueen = true;
 sumting.image = "https://static.wikia.nocookie.net/logosrupaulsdragrace/images/4/4f/SumTingWongDRPHSR1CastMug.jpg";
-vinas._tpm = true;
+vinas.customqueen = true;
 vinas.image = "https://static.wikia.nocookie.net/logosrupaulsdragrace/images/6/64/ViñasDeLuxeDRPHSR1CastMug.jpg";
-yuhua._tpm = true;
+yuhua.customqueen = true;
 yuhua.image = "https://static.wikia.nocookie.net/logosrupaulsdragrace/images/a/a3/YuhuaDRPHSR1CastMug.jpg";
 
 let SLAYSIAN_Cast = [arizona, bernie, brigiding, ivory, khianna, kittyS, yoko, siam, suki, sumting, vinas, yuhua]; 
