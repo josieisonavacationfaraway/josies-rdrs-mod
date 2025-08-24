@@ -279,9 +279,11 @@ if (window.location.pathname.endsWith("predef.html")) {
     }
 
 	// --- AS: Season 10 ---
-	const asDiv = Array.from(document.querySelectorAll("div.content-tab")).find(div =>
-        div.querySelector("h2 img[src*='StarFlag'] All Stars img[src*='StarFlag']")
-    );
+	const asDiv = Array.from(document.querySelectorAll("div.content-tab")).find(div => {
+	    const h2 = div.querySelector("h2");
+	    const img = h2?.querySelector("img[src*='StarFlag']");
+	    return img && h2.textContent.includes("All Stars");
+	});
 
 	if (asDiv) {
 		const asSeasons = asDiv.querySelector(".content-seasons");
