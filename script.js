@@ -188,69 +188,90 @@ yuhua.image = "https://static.wikia.nocookie.net/logosrupaulsdragrace/images/a/a
 let SLAYSIAN_Cast = [arizona, bernie, brigiding, ivory, khianna, kittyS, yoko, siam, suki, sumting, vinas, yuhua]; 
 
 // - PAGE EXCLUSIVE - //
-const createElement = (tag, html = "", className = "") => {
-    const el = document.createElement(tag);
-    el.innerHTML = html;
-    if (className) el.className = className;
-    return el;
-};
-
 document.addEventListener("DOMContentLoaded", () => {
-    const chocolateSection = document.querySelector(".options #chocolateBar")?.closest("div.aoitem");
-    if (chocolateSection) {
-        const badunkOption = createElement("p", `<input type="checkbox" id="tank2"> Badunkadunk Tank`);
-        const choosableParent = chocolateSection.querySelector("#chocolateBarChoosable")?.parentElement;
-        if (choosableParent) {
-            choosableParent.insertAdjacentElement("afterend", badunkOption);
-        } else {
-            chocolateSection.appendChild(badunkOption);
+    const optionsBox = document.querySelector(".options");
+
+    if (optionsBox) {
+        const chocolateSection = optionsBox.querySelector("#chocolateBar")?.closest("div.aoitem");
+        
+        if (chocolateSection) {
+            const badunkOption = document.createElement("p");
+            badunkOption.innerHTML = `<input type="checkbox" id="tank2"> Badunkadunk Tank`;
+
+            const choosable = chocolateSection.querySelector("#chocolateBarChoosable")?.parentElement;
+            if (choosable) {
+                choosable.insertAdjacentElement("afterend", badunkOption);
+            } else {
+                chocolateSection.appendChild(badunkOption);
+            }
         }
     }
 });
 
 if (window.location.pathname.endsWith("index.html")) {
-    UK7_Cast.forEach(q => addQueenToAll(q));
+	UK7_Cast .forEach(q => addQueenToAll(q));
 }
 
 if (window.location.pathname.endsWith("predef.html")) {
-    const tabs = Array.from(document.querySelectorAll("div.content-tab"));
+    // --- Philippines: Slaysian Royale ---
+    const philippinesDiv = Array.from(document.querySelectorAll("div.content-tab")).find(div =>
+        div.querySelector("h2 img[src*='PhilippinesFlag']")
+    );
 
-    const addSeason = (tab, seasonTitle, cast, simArgs, overlayUrl, overlayId) => {
-        const seasonsContainer = tab.querySelector(".content-seasons") || createElement("div", "", "content-seasons");
-        seasonsContainer.style.gridTemplateAreas = "'a'";
-        seasonsContainer.style.gridTemplateColumns = "1fr";
-
-        const newSeason = createElement("div", `
-            <h3 class="content-season-title">${seasonTitle}</h3>
-            <button onclick="predefCast(${cast}, ${simArgs.map(a => `'${a}'`).join(", ")})">Simulate</button>
-            <div class="content-season_overlay" aria-hidden="true" id="${overlayId}" 
-                style="background: linear-gradient(-10deg, rgba(247, 25, 154, 0.6) 15%, rgba(235, 13, 187, 0.6) 100%) 
-                center center / cover no-repeat, url('${overlayUrl}');">
-            </div>
-        `, "content-season");
-
-        seasonsContainer.appendChild(newSeason);
-        if (!tab.querySelector(".content-seasons")) tab.appendChild(seasonsContainer);
-    };
-]
-    const phTab = tabs.find(div => div.querySelector("h2 img[src*='PhilippinesFlag']"));
-    if (phTab) {
-        const newHeader = createElement("h2", `
+    if (philippinesDiv) {
+        const newHeader = document.createElement("h2");
+        newHeader.innerHTML = `
             <img src="image/flags/StarFlag.webp" class="countryFlag">
             <img src="image/flags/PhilippinesFlag.webp" class="countryFlag">
             Drag Race Philippines: Slaysian Royale
             <img src="image/flags/PhilippinesFlag.webp" class="countryFlag">
             <img src="image/flags/StarFlag.webp" class="countryFlag">
-        `);
-        phTab.appendChild(newHeader);
+        `;
 
-        addSeason(phTab, "PH Slaysian Royale", "SLAYSIAN_Cast", ["all-stars", "LFTC"], 
-                  "https://static.wikia.nocookie.net/logosrupaulsdragrace/images/1/19/DRPHSR1Logo2.jpg", "phslaysian");
+        const newSeasons = document.createElement("div");
+        newSeasons.className = "content-seasons";
+        newSeasons.style.gridTemplateAreas = "'a'";
+        newSeasons.style.gridTemplateColumns = "1fr";
+
+        const newSeason = document.createElement("div");
+        newSeason.className = "content-season";
+        newSeason.innerHTML = `
+            <h3 class="content-season-title">PH Slaysian Royale</h3>
+            <button onclick="predefCast(SLAYSIAN_Cast, 'all-stars', 'LFTC')">Simulate</button>
+            <div class="content-season_overlay" aria-hidden="true" id="phslaysian"
+                style="background: linear-gradient(-10deg, rgba(247, 25, 154, 0.6) 15%, rgba(235, 13, 187, 0.6) 100%) 
+                center center / cover no-repeat, 
+                url('https://static.wikia.nocookie.net/logosrupaulsdragrace/images/1/19/DRPHSR1Logo2.jpg');">
+            </div>
+        `;
+
+        newSeasons.appendChild(newSeason);
+        philippinesDiv.appendChild(newHeader);
+        philippinesDiv.appendChild(newSeasons);
     }
 
-    const ukTab = tabs.find(div => div.querySelector("h2 img[src*='UKFlag']"));
-    if (ukTab) {
-        addSeason(ukTab, "UK Season 7", "UK7_Cast", ["regular", "teams", "par-premiere"], 
-                  "https://static.wikia.nocookie.net/logosrupaulsdragrace/images/2/22/RDRUK7.jpg", "ukseason7");
+    // --- UK: Season 7 ---
+    const ukDiv = Array.from(document.querySelectorAll("div.content-tab")).find(div =>
+        div.querySelector("h2 img[src*='UKFlag']")
+    );
+
+    if (ukDiv) {
+        const ukSeasons = ukDiv.querySelector(".content-seasons");
+
+        if (ukSeasons) {
+            const newSeason = document.createElement("div");
+            newSeason.className = "content-season";
+            newSeason.innerHTML = `
+                <h3 class="content-season-title">UK Season 7</h3>
+                <button onclick="predefCast(UK7_Cast, 'regular', 'teams', 'par-premiere')">Simulate</button>
+                <div class="content-season_overlay" aria-hidden="true" id="ukseason7" 
+                    style="background: linear-gradient(-10deg, rgba(247, 25, 154, 0.6) 15%, rgba(235, 13, 187, 0.6) 100%) 
+                    center center / cover no-repeat, 
+                    url('https://static.wikia.nocookie.net/logosrupaulsdragrace/images/2/22/RDRUK7.jpg');">
+                </div>
+            `;
+
+            ukSeasons.appendChild(newSeason);
+        }
     }
 }
