@@ -63,7 +63,8 @@ class Queen {
         this.immPotion = false;
         this.chocolate = false;
         this.maxiT = false;
-		this._tpm = thirdpmug;
+        this._tpm = thirdpmug;
+
         this._name = name;
         this._actingStat = acting;
         this._comedyStat = comedy;
@@ -72,9 +73,10 @@ class Queen {
         this._improvStat = improv;
         this._runwayStat = runway;
         this._lipsyncStat = lipsync;
-        if (image == "noimage") {
+
+        if (image === "noimage") {
             this.image = "image/queens/noimage.jpg";
-        } else if (custom == true || _tpm == true) {
+        } else if (custom === true || this._tpm === true) {
             this.image = image;
         } else {
             this.image = "image/queens/" + image + ".webp";
