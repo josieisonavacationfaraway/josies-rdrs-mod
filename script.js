@@ -412,7 +412,7 @@ function injectDoubleSashay() {
     for (let i = 0; i < bottomQueens.length; i++) {
         bottomQueens[i].addToTrackRecord(" ELIM");
         eliminatedCast.push(bottomQueens[i]);
-        cast.splice(cast.indexOf(bottomQueens[i]), 1);
+        currentCast.splice(cast.indexOf(bottomQueens[i]), 1);
     }
 
     doubleSashay = true;
