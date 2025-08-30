@@ -366,7 +366,7 @@ function showDoubleShantayUI() {
     proceedBtn.style.cursor = "pointer";
     proceedBtn.onclick = () => {
         overlay.remove();
-        untucked();
+        lipSync();
     };
     btnRow.appendChild(proceedBtn);
 
