@@ -307,8 +307,8 @@ if (window.location.pathname.endsWith("predef.html")) {
 }
 
 // - FORCE RESULTS - //
-const originalLipSync = lipSync;
-lipSync = function(...args) {
+const originalLipSync = lipsyncDesc;
+lipsyncDesc = function(...args) {
     originalLipSync.apply(this, args);
     showDoubleShantayButton();
 };
