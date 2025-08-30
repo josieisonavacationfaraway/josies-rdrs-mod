@@ -400,13 +400,13 @@ function injectDoubleSashay() {
     screen.clean();
 
     for (let i = 0; i < bottomQueens.length; i++) {
-        screen.createImage(bottomQueens[i].image, "red");
+        screen.createImage(bottomQueens[i].image, "frebrick");
     }
 
     if (bottomQueens.length > 2) {
-        screen.createBold("None of you survived that lipsync, you must now sashay away...");
+        screen.createBold("I'm sorry but none of you showed the fire it takes to stay. You must all sashay away...");
     } else {
-        screen.createBold("I'm sorry, but both of you didn't show me the fire it takes to stay, sashay away...");
+        screen.createBold("I'm sorry but none of you showed the fire it takes to stay. You must both... sashay away.");
     }
 
     for (let i = 0; i < bottomQueens.length; i++) {
