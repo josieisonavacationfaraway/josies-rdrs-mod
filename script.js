@@ -402,13 +402,7 @@ function injectDoubleSashay() {
     for (let i = 0; i < bottomQueens.length; i++) {
         screen.createImage(bottomQueens[i].image, "firebrick");
     }
-
-    if (bottomQueens.length > 2) {
-        screen.createBold("I'm sorry but none of you showed the fire it takes to stay. You must all sashay away...");
-    } else {
-        screen.createBold("I'm sorry but none of you showed the fire it takes to stay. You must both... sashay away.");
-    }
-
+	
     if (bottomQueens.length > 2) {
         screen.createBold("I'm sorry but none of you showed the fire it takes to stay. You must all sashay away...");
         for (let i = 0; i < bottomQueens.length; i++) {
