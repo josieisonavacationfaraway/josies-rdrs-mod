@@ -30,6 +30,14 @@ function downloadTR() {
     });
 }
 
+const originalClean = Scene.prototype.clean;
+Scene.prototype.clean = function(...args) {
+    const btn = document.getElementById("doubleShantayBtn");
+    if (btn) btn.remove();
+
+    return originalClean.apply(this, args);
+};
+
 // - UK 7 CAST - //
 let BonesUK7 = new Queen("Bones", 7, 7, 7, 7, 7, 7, 7, "https://static.wikia.nocookie.net/logosrupaulsdragrace/images/a/ad/BonesDRUK7CastMug.jpg", true);
 let BonnieAnnClydeUK7 = new Queen("Bonnie Ann Clyde", 7, 7, 7, 7, 7, 7, 7, "https://static.wikia.nocookie.net/logosrupaulsdragrace/images/3/3d/BonnieAnnClydeDRUK7CastMug.jpg", true);
@@ -295,27 +303,22 @@ if (window.location.pathname.endsWith("predef.html")) {
 }
 
 // - FORCE RESULTS - //
-const ogLipsync = lipSync;
+const originalLipSync = lipSync;
 lipSync = function(...args) {
-	ogLipsync.apply(this, args);
-
-	showDoubleShantayButton();
-}
+    originalLipSync.apply(this, args);
+    showDoubleShantayButton();
+};
 
 function showDoubleShantayButton() {
     if (document.getElementById("doubleShantayBtn")) return;
-
     const container = document.querySelector(".buttons") || document.body;
-
     const btn = document.createElement("button");
     btn.id = "doubleShantayBtn";
     btn.textContent = "Rig a Double Shantay 💖";
-    btn.style.margin = "10px";
     btn.onclick = () => {
         btn.remove();
         injectDoubleShantay();
     };
-
     container.appendChild(btn);
 }
 
