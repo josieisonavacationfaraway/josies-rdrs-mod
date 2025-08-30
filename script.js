@@ -293,3 +293,144 @@ if (window.location.pathname.endsWith("predef.html")) {
 		}
 	}
 }
+
+
+// --- AUTO DOUBLE SHANTAY OVERLAY ---
+let doubleShantayOverlayShown = false;
+
+function autoDoubleShantayCheck() {
+    // Check conditions: more than 1 bottom queen, not All Stars, overlay not already shown
+    if (bottomQueens.length > 1 && !all_stars && !doubleShantayOverlayShown) {
+        doubleShantayOverlayShown = true; // prevent multiple overlays
+        showDoubleShantayUI();
+    }
+
+    // Reset flag if there are no bottom queens (so next lipsync can trigger it)
+    if (bottomQueens.length <= 1 && doubleShantayOverlayShown) {
+        doubleShantayOverlayShown = false;
+    }
+}
+
+// --- THE UI OVERLAY FUNCTION ---
+function showDoubleShantayUI() {
+    let oldOverlay = document.getElementById("doubleShantayOverlay");
+    if (oldOverlay) oldOverlay.remove();
+
+    const overlay = document.createElement("div");
+    overlay.id = "doubleShantayOverlay";
+    overlay.style.position = "fixed";
+    overlay.style.top = "0";
+    overlay.style.left = "0";
+    overlay.style.width = "100%";
+    overlay.style.height = "100%";
+    overlay.style.background = "rgba(0,0,0,0.85)";
+    overlay.style.display = "flex";
+    overlay.style.flexDirection = "column";
+    overlay.style.alignItems = "center";
+    overlay.style.justifyContent = "center";
+    overlay.style.zIndex = "9999";
+    overlay.style.color = "white";
+    overlay.style.textAlign = "center";
+    overlay.style.fontFamily = "Arial, sans-serif";
+
+    const title = document.createElement("h2");
+    title.textContent = "Bottom Lip-sync Detected!";
+    title.style.fontSize = "2em";
+    title.style.marginBottom = "20px";
+    overlay.appendChild(title);
+
+    const imgRow = document.createElement("div");
+    imgRow.style.display = "flex";
+    imgRow.style.gap = "10px";
+    for (let i = 0; i < bottomQueens.length; i++) {
+        const img = document.createElement("img");
+        img.src = bottomQueens[i].image;
+        img.style.width = "120px";
+        img.style.height = "120px";
+        img.style.border = "4px solid magenta";
+        img.style.borderRadius = "10px";
+        imgRow.appendChild(img);
+    }
+    overlay.appendChild(imgRow);
+
+    const btnRow = document.createElement("div");
+    btnRow.style.marginTop = "30px";
+    btnRow.style.display = "flex";
+    btnRow.style.gap = "15px";
+
+    const proceedBtn = document.createElement("button");
+    proceedBtn.textContent = "Proceed Normally";
+    proceedBtn.style.padding = "10px 20px";
+    proceedBtn.style.borderRadius = "8px";
+    proceedBtn.style.border = "none";
+    proceedBtn.style.cursor = "pointer";
+    proceedBtn.onclick = () => {
+        overlay.remove();
+        untucked();
+    };
+    btnRow.appendChild(proceedBtn);
+
+    const dsBtn = document.createElement("button");
+    dsBtn.textContent = "Force Double Shantay";
+    dsBtn.style.padding = "10px 20px";
+    dsBtn.style.borderRadius = "8px";
+    dsBtn.style.border = "none";
+    dsBtn.style.cursor = "pointer";
+    dsBtn.style.background = "magenta";
+    dsBtn.style.color = "white";
+    dsBtn.onclick = () => {
+        overlay.remove();
+        injectDoubleShantay();
+    };
+    btnRow.appendChild(dsBtn);
+
+    overlay.appendChild(btnRow);
+    document.body.appendChild(overlay);
+}
+
+function injectDoubleShantay() {
+	let screen = new Scene();
+	screen.clean();
+	
+	for (let i = 0; i < bottomQueens.length; i++) {
+	    screen.createImage(bottomQueens[i].image, "magenta");
+	}
+	
+	if (bottomQueens.length > 2) {
+	    screen.createBold("Condragulations, shantay you all stay!!");
+	} else {
+	    screen.createBold("Condragulations, shantay you both!!");
+	}
+	
+	for (let i = 0; i < bottomQueens.length; i++) {
+	    bottomQueens[i].addToTrackRecord(" BTM" + bottomQueens.length);
+	    bottomQueens[i].unfavoritism += 3;
+	    bottomQueens[i].ppe += 1;
+	}
+	
+	doubleShantay = true;
+	
+	if (kandyFOc) {
+	    screen.createButton("Proceed", "kandyFO()");
+	} else {
+	    for (let i = 0; i < bottomQueens.length; i++) {
+	        if (bottomQueens[i].maxiT === true) {
+	            let lastIndex = bottomQueens[i].trackRecord.length - 1;
+	            bottomQueens[i].trackRecord[lastIndex - 1] += bottomQueens[i].trackRecord[lastIndex];
+	            bottomQueens[i].trackRecord.splice(lastIndex, 1);
+	            bottomQueens[i].maxiT = false;
+	        }
+	    }
+	
+	    if ((s6Premiere || s12Premiere || porkchopPremiere || s14Premiere || ph2Premiere || newImmTwst) && premiereCounter < 3) {
+	        screen.createButton("Proceed", "doublePremiere()");
+	    } else if (CheckForReturning()) {
+	        screen.createButton("Proceed", "returningQueenScreen()");
+	    } else {
+	        screen.createButton("Proceed", "untucked()");
+	    }
+	}
+}
+
+// --- START THE AUTOMATIC CHECK LOOP ---
+setInterval(autoDoubleShantayCheck, 500); // checks every 0.5s
