@@ -336,4 +336,4 @@ function injectDoubleShantay() {
 	        screen.createButton("Proceed", "untucked()");
 	    }
 	}
-
+}
