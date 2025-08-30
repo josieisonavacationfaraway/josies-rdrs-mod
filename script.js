@@ -30,13 +30,17 @@ function downloadTR() {
     });
 }
 
-const originalClean = Scene.prototype.clean;
-Scene.prototype.clean = function(...args) {
-    const btn = document.getElementById("doubleShantayBtn");
-    if (btn) btn.remove();
+document.addEventListener("DOMContentLoaded", () => {
+    if (window.Scene && Scene.prototype.clean) {
+        const originalClean = Scene.prototype.clean;
+        Scene.prototype.clean = function(...args) {
+            const btn = document.getElementById("doubleShantayBtn");
+            if (btn) btn.remove();
 
-    return originalClean.apply(this, args);
-};
+            return originalClean.apply(this, args);
+        };
+    }
+});
 
 // - UK 7 CAST - //
 let BonesUK7 = new Queen("Bones", 7, 7, 7, 7, 7, 7, 7, "https://static.wikia.nocookie.net/logosrupaulsdragrace/images/a/ad/BonesDRUK7CastMug.jpg", true);
