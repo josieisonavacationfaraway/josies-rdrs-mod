@@ -298,30 +298,16 @@ if (window.location.pathname.endsWith("predef.html")) {
 // --- AUTO DOUBLE SHANTAY OVERLAY ---
 let doubleShantayOverlayShown = false;
 
-// --- GLOBAL FLAG ---
-let doubleShantayOverlayShown = false;
-
-// --- OBSERVER TO DETECT LIPSYNC START ---
-const observer = new MutationObserver(() => {
-    const lipSyncEl = document.querySelector(".lipSync");
-    if (lipSyncEl) {
-        autoDoubleShantayCheck();
-    }
-});
-
-observer.observe(document.body, { childList: true, subtree: true });
-
-// --- AUTO DOUBLE SHANTAY CHECK ---
-function autoDoubleShantayCheck() {
+// --- HOOK lipSync() ---
+const originalLipSync = lipSync;
+lipSync = function () {
     if (bottomQueens.length > 1 && !all_stars && !doubleShantayOverlayShown) {
-        doubleShantayOverlayShown = true; // prevent multiple overlays
+        doubleShantayOverlayShown = true;
         showDoubleShantayUI();
+    } else {
+        originalLipSync(); // default behavior
     }
-
-    if (bottomQueens.length <= 1 && doubleShantayOverlayShown) {
-        doubleShantayOverlayShown = false;
-    }
-}
+};
 
 // --- THE UI OVERLAY FUNCTION ---
 function showDoubleShantayUI() {
@@ -345,6 +331,7 @@ function showDoubleShantayUI() {
         color: "white",
         textAlign: "center",
         fontFamily: "Arial, sans-serif",
+        animation: "fadeIn 0.4s ease",
     });
 
     const title = document.createElement("h2");
@@ -361,9 +348,9 @@ function showDoubleShantayUI() {
         gap: "10px",
     });
 
-    for (let i = 0; i < bottomQueens.length; i++) {
+    for (let queen of bottomQueens) {
         const img = document.createElement("img");
-        img.src = bottomQueens[i].image;
+        img.src = queen.image;
         Object.assign(img.style, {
             width: "120px",
             height: "120px",
@@ -386,7 +373,8 @@ function showDoubleShantayUI() {
     styleButton(proceedBtn);
     proceedBtn.onclick = () => {
         overlay.remove();
-        lipSync(); // continue lipsync normally
+        doubleShantayOverlayShown = false; // reset for next lipsync
+        originalLipSync();
     };
     btnRow.appendChild(proceedBtn);
 
@@ -395,6 +383,7 @@ function showDoubleShantayUI() {
     styleButton(dsBtn, "magenta", "white");
     dsBtn.onclick = () => {
         overlay.remove();
+        doubleShantayOverlayShown = false; // reset for next lipsync
         injectDoubleShantay();
     };
     btnRow.appendChild(dsBtn);
@@ -403,6 +392,7 @@ function showDoubleShantayUI() {
     document.body.appendChild(overlay);
 }
 
+// --- Helper button styling ---
 function styleButton(button, bg = "#eee", color = "#000") {
     Object.assign(button.style, {
         padding: "10px 20px",
@@ -411,7 +401,12 @@ function styleButton(button, bg = "#eee", color = "#000") {
         cursor: "pointer",
         background: bg,
         color: color,
+        fontSize: "1em",
+        transition: "0.2s",
     });
+
+    button.onmouseover = () => (button.style.opacity = "0.8");
+    button.onmouseleave = () => (button.style.opacity = "1");
 }
 
 function injectDoubleShantay() {
@@ -456,7 +451,4 @@ function injectDoubleShantay() {
 	        screen.createButton("Proceed", "untucked()");
 	    }
 	}
-}
 
-// --- START THE AUTOMATIC CHECK LOOP ---
-setInterval(autoDoubleShantayCheck, 500); // checks every 0.5s
