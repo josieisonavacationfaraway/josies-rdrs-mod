@@ -314,8 +314,7 @@ lipsyncDesc = function(...args) {
 };
 
 function showForceButtons() {
-    const container = document.querySelector(".buttons");
-    if (!container) return;
+    const container = document.body;
 
     const oldShantay = document.getElementById("doubleShantayBtn");
     const oldSashay = document.getElementById("doubleSashayBtn");
