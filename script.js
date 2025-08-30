@@ -310,62 +310,117 @@ if (window.location.pathname.endsWith("predef.html")) {
 const originalLipSync = lipsyncDesc;
 lipsyncDesc = function(...args) {
     originalLipSync.apply(this, args);
-    showDoubleShantayButton();
+    showForceButtons();
 };
 
-function showDoubleShantayButton() {
-    if (document.getElementById("doubleShantayBtn")) return;
-    const container = document.querySelector(".buttons") || document.body;
-    const btn = document.createElement("button");
-    btn.id = "doubleShantayBtn";
-    btn.textContent = "Rig a Double Shantay 💖";
-    btn.onclick = () => {
-        btn.remove();
+function showForceButtons() {
+    const container = document.querySelector(".buttons");
+    if (!container) return;
+
+    const oldShantay = document.getElementById("doubleShantayBtn");
+    const oldSashay = document.getElementById("doubleSashayBtn");
+    if (oldShantay) oldShantay.remove();
+    if (oldSashay) oldSashay.remove();
+
+    const shantayBtn = document.createElement("button");
+    shantayBtn.id = "doubleShantayBtn";
+    shantayBtn.textContent = "Double Shantay";
+    shantayBtn.onclick = () => {
+        shantayBtn.remove();
+        sashayBtn.remove();
         injectDoubleShantay();
     };
-    container.appendChild(btn);
+
+    const sashayBtn = document.createElement("button");
+    sashayBtn.id = "doubleSashayBtn";
+    sashayBtn.textContent = "Double Sashay";
+    sashayBtn.onclick = () => {
+        shantayBtn.remove();
+        sashayBtn.remove();
+        injectDoubleSashay();
+    };
+
+    const proceedBtn = container.querySelector("button");
+    if (proceedBtn) {
+        proceedBtn.insertAdjacentElement("beforebegin", shantayBtn);
+        proceedBtn.insertAdjacentElement("beforebegin", sashayBtn);
+    } else {
+        container.appendChild(shantayBtn);
+        container.appendChild(sashayBtn);
+    }
 }
 
 function injectDoubleShantay() {
-	let screen = new Scene();
-	screen.clean();
-	
-	for (let i = 0; i < bottomQueens.length; i++) {
-	    screen.createImage(bottomQueens[i].image, "magenta");
-	}
-	
-	if (bottomQueens.length > 2) {
-	    screen.createBold("Condragulations, shantay you all stay!!");
+    let screen = new Scene();
+    screen.clean();
+
+    for (let i = 0; i < bottomQueens.length; i++) {
+        screen.createImage(bottomQueens[i].image, "magenta");
+    }
+
+    if (bottomQueens.length > 2) {
+        screen.createBold("Condragulations, shantay you all stay!!");
+    } else {
+        screen.createBold("Condragulations, shantay you both!!");
+    }
+
+    for (let i = 0; i < bottomQueens.length; i++) {
+        bottomQueens[i].addToTrackRecord(" BTM" + bottomQueens.length);
+        bottomQueens[i].unfavoritism += 3;
+        bottomQueens[i].ppe += 1;
+    }
+
+    doubleShantay = true;
+
+    if (kandyFOc) {
+        screen.createButton("Proceed", "kandyFO()");
+    } else {
+        for (let i = 0; i < bottomQueens.length; i++) {
+            if (bottomQueens[i].maxiT === true) {
+                let lastIndex = bottomQueens[i].trackRecord.length - 1;
+                bottomQueens[i].trackRecord[lastIndex - 1] += bottomQueens[i].trackRecord[lastIndex];
+                bottomQueens[i].trackRecord.splice(lastIndex, 1);
+                bottomQueens[i].maxiT = false;
+            }
+        }
+
+        if ((s6Premiere || s12Premiere || porkchopPremiere || s14Premiere || ph2Premiere || newImmTwst) && premiereCounter < 3) {
+            screen.createButton("Proceed", "doublePremiere()");
+        } else if (CheckForReturning()) {
+            screen.createButton("Proceed", "returningQueenScreen()");
+        } else {
+            screen.createButton("Proceed", "untucked()");
+        }
+    }
+}
+
+function injectDoubleSashay() {
+    let screen = new Scene();
+    screen.clean();
+
+    for (let i = 0; i < bottomQueens.length; i++) {
+        screen.createImage(bottomQueens[i].image, "red");
+    }
+
+    if (bottomQueens.length > 2) {
+        screen.createBold("None of you survived that lipsync, you must now sashay away...");
+    } else {
+        screen.createBold("I'm sorry, but both of you didn't show me the fire it takes to stay, sashay away...");
+    }
+
+    for (let i = 0; i < bottomQueens.length; i++) {
+        bottomQueens[i].addToTrackRecord(" ELIM");
+        eliminatedCast.push(bottomQueens[i]);
+        cast.splice(cast.indexOf(bottomQueens[i]), 1);
+    }
+
+    doubleSashay = true;
+
+    if ((s6Premiere || s12Premiere || porkchopPremiere || s14Premiere || ph2Premiere || newImmTwst) && premiereCounter < 3) {
+        screen.createButton("Proceed", "doublePremiere()");
+    } else if (CheckForReturning()) {
+        screen.createButton("Proceed", "returningQueenScreen()");
 	} else {
-	    screen.createBold("Condragulations, shantay you both!!");
-	}
-	
-	for (let i = 0; i < bottomQueens.length; i++) {
-	    bottomQueens[i].addToTrackRecord(" BTM" + bottomQueens.length);
-	    bottomQueens[i].unfavoritism += 3;
-	    bottomQueens[i].ppe += 1;
-	}
-	
-	doubleShantay = true;
-	
-	if (kandyFOc) {
-	    screen.createButton("Proceed", "kandyFO()");
-	} else {
-	    for (let i = 0; i < bottomQueens.length; i++) {
-	        if (bottomQueens[i].maxiT === true) {
-	            let lastIndex = bottomQueens[i].trackRecord.length - 1;
-	            bottomQueens[i].trackRecord[lastIndex - 1] += bottomQueens[i].trackRecord[lastIndex];
-	            bottomQueens[i].trackRecord.splice(lastIndex, 1);
-	            bottomQueens[i].maxiT = false;
-	        }
-	    }
-	
-	    if ((s6Premiere || s12Premiere || porkchopPremiere || s14Premiere || ph2Premiere || newImmTwst) && premiereCounter < 3) {
-	        screen.createButton("Proceed", "doublePremiere()");
-	    } else if (CheckForReturning()) {
-	        screen.createButton("Proceed", "returningQueenScreen()");
-	    } else {
-	        screen.createButton("Proceed", "untucked()");
-	    }
-	}
+        screen.createButton("Proceed", "untucked()");
+    }
 }
