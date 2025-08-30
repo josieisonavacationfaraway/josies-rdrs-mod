@@ -298,14 +298,26 @@ if (window.location.pathname.endsWith("predef.html")) {
 // --- AUTO DOUBLE SHANTAY OVERLAY ---
 let doubleShantayOverlayShown = false;
 
+// --- GLOBAL FLAG ---
+let doubleShantayOverlayShown = false;
+
+// --- OBSERVER TO DETECT LIPSYNC START ---
+const observer = new MutationObserver(() => {
+    const lipSyncEl = document.querySelector(".lipSync");
+    if (lipSyncEl) {
+        autoDoubleShantayCheck();
+    }
+});
+
+observer.observe(document.body, { childList: true, subtree: true });
+
+// --- AUTO DOUBLE SHANTAY CHECK ---
 function autoDoubleShantayCheck() {
-    // Check conditions: more than 1 bottom queen, not All Stars, overlay not already shown
     if (bottomQueens.length > 1 && !all_stars && !doubleShantayOverlayShown) {
         doubleShantayOverlayShown = true; // prevent multiple overlays
         showDoubleShantayUI();
     }
 
-    // Reset flag if there are no bottom queens (so next lipsync can trigger it)
     if (bottomQueens.length <= 1 && doubleShantayOverlayShown) {
         doubleShantayOverlayShown = false;
     }
@@ -318,66 +330,69 @@ function showDoubleShantayUI() {
 
     const overlay = document.createElement("div");
     overlay.id = "doubleShantayOverlay";
-    overlay.style.position = "fixed";
-    overlay.style.top = "0";
-    overlay.style.left = "0";
-    overlay.style.width = "100%";
-    overlay.style.height = "100%";
-    overlay.style.background = "rgba(0,0,0,0.85)";
-    overlay.style.display = "flex";
-    overlay.style.flexDirection = "column";
-    overlay.style.alignItems = "center";
-    overlay.style.justifyContent = "center";
-    overlay.style.zIndex = "9999";
-    overlay.style.color = "white";
-    overlay.style.textAlign = "center";
-    overlay.style.fontFamily = "Arial, sans-serif";
+    Object.assign(overlay.style, {
+        position: "fixed",
+        top: "0",
+        left: "0",
+        width: "100%",
+        height: "100%",
+        background: "rgba(0,0,0,0.85)",
+        display: "flex",
+        flexDirection: "column",
+        alignItems: "center",
+        justifyContent: "center",
+        zIndex: "9999",
+        color: "white",
+        textAlign: "center",
+        fontFamily: "Arial, sans-serif",
+    });
 
     const title = document.createElement("h2");
     title.textContent = "Bottom Lip-sync Detected!";
-    title.style.fontSize = "2em";
-    title.style.marginBottom = "20px";
+    Object.assign(title.style, {
+        fontSize: "2em",
+        marginBottom: "20px",
+    });
     overlay.appendChild(title);
 
     const imgRow = document.createElement("div");
-    imgRow.style.display = "flex";
-    imgRow.style.gap = "10px";
+    Object.assign(imgRow.style, {
+        display: "flex",
+        gap: "10px",
+    });
+
     for (let i = 0; i < bottomQueens.length; i++) {
         const img = document.createElement("img");
         img.src = bottomQueens[i].image;
-        img.style.width = "120px";
-        img.style.height = "120px";
-        img.style.border = "4px solid magenta";
-        img.style.borderRadius = "10px";
+        Object.assign(img.style, {
+            width: "120px",
+            height: "120px",
+            border: "4px solid magenta",
+            borderRadius: "10px",
+        });
         imgRow.appendChild(img);
     }
     overlay.appendChild(imgRow);
 
     const btnRow = document.createElement("div");
-    btnRow.style.marginTop = "30px";
-    btnRow.style.display = "flex";
-    btnRow.style.gap = "15px";
+    Object.assign(btnRow.style, {
+        marginTop: "30px",
+        display: "flex",
+        gap: "15px",
+    });
 
     const proceedBtn = document.createElement("button");
     proceedBtn.textContent = "Proceed Normally";
-    proceedBtn.style.padding = "10px 20px";
-    proceedBtn.style.borderRadius = "8px";
-    proceedBtn.style.border = "none";
-    proceedBtn.style.cursor = "pointer";
+    styleButton(proceedBtn);
     proceedBtn.onclick = () => {
         overlay.remove();
-        lipSync();
+        lipSync(); // continue lipsync normally
     };
     btnRow.appendChild(proceedBtn);
 
     const dsBtn = document.createElement("button");
     dsBtn.textContent = "Force Double Shantay";
-    dsBtn.style.padding = "10px 20px";
-    dsBtn.style.borderRadius = "8px";
-    dsBtn.style.border = "none";
-    dsBtn.style.cursor = "pointer";
-    dsBtn.style.background = "magenta";
-    dsBtn.style.color = "white";
+    styleButton(dsBtn, "magenta", "white");
     dsBtn.onclick = () => {
         overlay.remove();
         injectDoubleShantay();
@@ -386,6 +401,17 @@ function showDoubleShantayUI() {
 
     overlay.appendChild(btnRow);
     document.body.appendChild(overlay);
+}
+
+function styleButton(button, bg = "#eee", color = "#000") {
+    Object.assign(button.style, {
+        padding: "10px 20px",
+        borderRadius: "8px",
+        border: "none",
+        cursor: "pointer",
+        background: bg,
+        color: color,
+    });
 }
 
 function injectDoubleShantay() {
