@@ -314,7 +314,7 @@ lipsyncDesc = function(...args) {
 };
 
 function showForceButtons() {
-    const container = document.body;
+    const container = document.getElementById("MainBlock");
 
     const oldShantay = document.getElementById("doubleShantayBtn");
     const oldSashay = document.getElementById("doubleSashayBtn");
@@ -339,7 +339,9 @@ function showForceButtons() {
         injectDoubleSashay();
     };
 
-    const proceedBtn = container.querySelector("button");
+    const proceedBtn = Array.from(container.querySelectorAll("button"))
+        .find(btn => btn.textContent.trim() === "Proceed");
+
     if (proceedBtn) {
         proceedBtn.insertAdjacentElement("beforebegin", shantayBtn);
         proceedBtn.insertAdjacentElement("beforebegin", sashayBtn);
@@ -360,7 +362,7 @@ function injectDoubleShantay() {
     if (bottomQueens.length > 2) {
         screen.createBold("Condragulations, shantay you all stay!!");
     } else {
-        screen.createBold("Condragulations, shantay you both!!");
+        screen.createBold("Condragulations, shantay you both stay!");
     }
 
     for (let i = 0; i < bottomQueens.length; i++) {
