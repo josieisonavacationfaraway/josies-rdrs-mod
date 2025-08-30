@@ -400,7 +400,7 @@ function injectDoubleSashay() {
     screen.clean();
 
     for (let i = 0; i < bottomQueens.length; i++) {
-        screen.createImage(bottomQueens[i].image, "frebrick");
+        screen.createImage(bottomQueens[i].image, "firebrick");
     }
 
     if (bottomQueens.length > 2) {
@@ -409,10 +409,24 @@ function injectDoubleSashay() {
         screen.createBold("I'm sorry but none of you showed the fire it takes to stay. You must both... sashay away.");
     }
 
-    for (let i = 0; i < bottomQueens.length; i++) {
-        bottomQueens[i].addToTrackRecord(" ELIM");
-        eliminatedCast.push(bottomQueens[i]);
-        currentCast.splice(currentCast.indexOf(bottomQueens[i]), 1);
+    if (bottomQueens.length > 2) {
+        screen.createBold("I'm sorry but none of you showed the fire it takes to stay. You must all sashay away...");
+        for (let i = 0; i < bottomQueens.length; i++) {
+            bottomQueens[i].addToTrackRecord(" ELIM ");
+            eliminatedCast.push(bottomQueens[i]);
+            currentCast.splice(currentCast.indexOf(bottomQueens[i]), 1);
+        }
+    } else {
+        screen.createBold("I'm sorry but none of you showed the fire it takes to stay. You must both... sashay away.");
+
+        const lastTwo = bottomQueens.slice(-2);
+        lastTwo.forEach((queen, index) => {
+            queen.addToTrackRecord(" ELIM ");
+            queen.unfavoritism += 5;
+            queen.rankP = `tie${index + 1}`;
+            eliminatedCast.unshift(queen);
+            currentCast.splice(currentCast.indexOf(queen), 1);
+        });
     }
 
     doubleSashay = true;
