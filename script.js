@@ -313,6 +313,12 @@ lipsyncDesc = function(...args) {
     showForceButtons();
 };
 
+const originalASLipSync = asLipsyncDesc;
+asLipsyncDesc = function(...args) {
+    originalASLipSync.apply(this, args);
+    showForceButtons();
+};
+
 function showForceButtons() {
     const container = document.getElementById("MainBlock");
 
