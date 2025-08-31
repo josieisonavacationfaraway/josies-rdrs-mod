@@ -307,21 +307,31 @@ if (window.location.pathname.endsWith("predef.html")) {
 }
 
 // - FORCE RESULTS - //
-const originalLipSync = lipsyncDesc;
-lipsyncDesc = function(...args) {
-    originalLipSync.apply(this, args);
-    showForceButtons();
-};
+document.addEventListener("DOMContentLoaded", () => {
+    if (typeof lipsyncDesc === "function") {
+        const originalLipSync = lipsyncDesc;
+        lipsyncDesc = function(...args) {
+            originalLipSync.apply(this, args);
+            showForceButtons();
+        };
+    }
 
-const originalASLipSync = asLipsyncDesc;
-asLipsyncDesc = function(...args) {
-    originalASLipSync.apply(this, args);
-    showForceButtons();
-};
+    if (typeof asLipsyncDesc === "function") {
+        const originalASLipSync = asLipsyncDesc;
+        asLipsyncDesc = function(...args) {
+            originalASLipSync.apply(this, args);
+            showForceButtons();
+        };
+    }
+});
 
 function showForceButtons() {
     const container = document.getElementById("MainBlock");
-    if (!container) return;
+    if (!container) {
+        console.warn("MainBlock not found, retrying in 100ms...");
+        setTimeout(showForceButtons, 100);
+        return;
+    }
 
     document.getElementById("doubleShantayBtn")?.remove();
     document.getElementById("doubleSashayBtn")?.remove();
@@ -329,6 +339,11 @@ function showForceButtons() {
     const shantayBtn = document.createElement("button");
     shantayBtn.id = "doubleShantayBtn";
     shantayBtn.textContent = "Double Shantay";
+    shantayBtn.onclick = () => {
+        injectDoubleShantay();
+        shantayBtn.remove();
+        sashayBtn?.remove();
+    };
 
     let sashayBtn = null;
     if (!all_stars) {
@@ -341,12 +356,6 @@ function showForceButtons() {
             sashayBtn.remove();
         };
     }
-
-    shantayBtn.onclick = () => {
-        injectDoubleShantay();
-        shantayBtn.remove();
-        if (sashayBtn) sashayBtn.remove();
-    };
 
     container.prepend(shantayBtn);
     if (sashayBtn) container.prepend(sashayBtn);
