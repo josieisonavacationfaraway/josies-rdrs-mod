@@ -336,24 +336,30 @@ function showForceButtons() {
         injectDoubleShantay();
     };
 
-    const sashayBtn = document.createElement("button");
-    sashayBtn.id = "doubleSashayBtn";
-    sashayBtn.textContent = "Double Sashay";
-    sashayBtn.onclick = () => {
-        shantayBtn.remove();
-        sashayBtn.remove();
-        injectDoubleSashay();
-    };
+	if (all_stars === fale) {
+		const sashayBtn = document.createElement("button");
+	    sashayBtn.id = "doubleSashayBtn";
+	    sashayBtn.textContent = "Double Sashay";
+	    sashayBtn.onclick = () => {
+	        shantayBtn.remove();
+	        sashayBtn.remove();
+	        injectDoubleSashay();
+		};
+	}   
 
     const proceedBtn = Array.from(container.querySelectorAll("button"))
         .find(btn => btn.textContent.trim() === "Proceed");
 
     if (proceedBtn) {
         proceedBtn.insertAdjacentElement("beforebegin", shantayBtn);
-        proceedBtn.insertAdjacentElement("beforebegin", sashayBtn);
+        if (all_stars === false) {
+			proceedBtn.insertAdjacentElement("beforebegin", sashayBtn);
+		}
     } else {
         container.appendChild(shantayBtn);
-        container.appendChild(sashayBtn);
+        if (all_stars === false) {
+			proceedBtn.insertAdjacentElement("beforebegin", sashayBtn);
+		}
     }
 }
 
@@ -432,8 +438,6 @@ function allStarsDoubleShantay() {
 	
 	    top2[0].addToTrackRecord(" WIN");
 	    top2[1].addToTrackRecord(" WIN");
-	
-	    screen.createHorizontalLine();
 
 		assasintable.push(top2[0].getName() + " & " + top2[1].getName());
 		assasinlipstick.push(top2[0].lipstick.getName());
@@ -479,6 +483,8 @@ function allStarsDoubleShantay() {
         screen.createParagraph(top2[1].getName() + ", you are safe.");
     }
 
+	screen.createHorizontalLine();
+
     if (conjoinedQueens && conjoinedCheck) {
         conjoinedReturn(top2[0], top2[1]);
         conjoinedCheck = false;
@@ -486,15 +492,17 @@ function allStarsDoubleShantay() {
 	
     let names = "";
     for (let i = 0; i < bottomQueens.length; i++) {
-         screen.createImage(bottomQueens[i].image, "red");
+        screen.createImage(bottomQueens[i].image, "red");
         names += bottomQueens[i].getName() + ". ";
+		
+		bottomQueens[i].addToTrackRecord(" BTM" + bottomQueens.length);
+		bottomQueens[i].unfavoritism += 3;
+        bottomQueens[i].ppe += 1;
    }
     screen.createBold(names);
     screen.createParagraph("I'm going to give a second chance to... All of you...");
     screen.createBold("Shantay you all stay!");
     screen.createHorizontalLine();
-    assasinlipstick.push(top2[0].lipstick.getName() + " & " + top2[1].lipstick.getName());
-    assasinlipstick.push(" ");
 
     createButtonLipsync();
 }
