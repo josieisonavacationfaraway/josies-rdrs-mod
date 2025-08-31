@@ -323,19 +323,15 @@ function showForceButtons() {
     const container = document.getElementById("MainBlock");
     if (!container) return;
 
-    // Remove old buttons if present
-    const oldShantay = document.getElementById("doubleShantayBtn");
-    const oldSashay = document.getElementById("doubleSashayBtn");
-    if (oldShantay) oldShantay.remove();
-    if (oldSashay) oldSashay.remove();
+    document.getElementById("doubleShantayBtn")?.remove();
+    document.getElementById("doubleSashayBtn")?.remove();
 
-    // Create Shantay button
     const shantayBtn = document.createElement("button");
     shantayBtn.id = "doubleShantayBtn";
     shantayBtn.textContent = "Double Shantay";
 
     let sashayBtn = null;
-    if (all_stars === false) {
+    if (!all_stars) {
         sashayBtn = document.createElement("button");
         sashayBtn.id = "doubleSashayBtn";
         sashayBtn.textContent = "Double Sashay";
@@ -352,17 +348,8 @@ function showForceButtons() {
         if (sashayBtn) sashayBtn.remove();
     };
 
-    // Insert buttons before Proceed if it exists
-    const proceedBtn = Array.from(container.querySelectorAll("button"))
-        .find(btn => btn.textContent.trim() === "Proceed");
-
-    if (proceedBtn) {
-        proceedBtn.insertAdjacentElement("beforebegin", shantayBtn);
-        if (sashayBtn) proceedBtn.insertAdjacentElement("beforebegin", sashayBtn);
-    } else {
-        container.appendChild(shantayBtn);
-        if (sashayBtn) container.appendChild(sashayBtn);
-    }
+    container.prepend(shantayBtn);
+    if (sashayBtn) container.prepend(sashayBtn);
 }
 
 function injectDoubleShantay() {
