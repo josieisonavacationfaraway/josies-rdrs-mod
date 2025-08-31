@@ -1,4 +1,112 @@
 // - BUG FIXING - //
+let firstEpisodeChallenge = "design"; 
+
+function spConf() {
+    let screen = new Scene();
+    screen.clean();
+    screen.createHeader("First Episode");
+    screen.createBold("Choose what is the first episode of the season!");
+    screen.createHorizontalLine();
+
+    let main = document.querySelector("div#MainBlock");
+    let centering = document.createElement("center");
+
+    // All possible challenges (expandable!)
+    const firstEpChallenges = [
+        { label: "Design", value: "design" },
+        { label: "Runway", value: "runway" },
+        { label: "Talent Show", value: "talentshow" },
+        { label: "Girl Groups", value: "girlgroup" },
+        { label: "Comedy", value: "comedy" },
+        { label: "Rusical", value: "rusical" },
+        { label: "Ball", value: "ball" },
+        { label: "Makeover", value: "makeover" }
+    ];
+
+    // Dropdown menu
+    let select = document.createElement("select");
+    select.setAttribute("class", "queenList");
+    select.setAttribute("id", "challenge");
+    select.addEventListener("change", frEp);
+
+    // Populate dropdown with options
+    for (let ch of firstEpChallenges) {
+        let option = document.createElement("option");
+        option.value = ch.value;
+        option.textContent = ch.label;
+        select.appendChild(option);
+    }
+
+    centering.appendChild(select);
+    centering.appendChild(document.createElement("br"));
+    centering.appendChild(document.createElement("br"));
+    main.appendChild(centering);
+
+    screen.createHorizontalLine();
+    screen.createButton("Start Now!", "", "strPrm");
+
+    let start = document.querySelector("#strPrm");
+    start.addEventListener("click", e => {
+        if (chocolateBarTwist) {
+            if (chocolateBarTwistChoosable) chooseGoldenBar();
+            else giveChocolate();
+        } else if (s9Premiere) {
+            chooseLateQueen();
+        } else if (s6Premiere || s12Premiere || s14Premiere || ph2Premiere || newImmTwst) {
+            doublePremiere();
+        } else {
+            newEpisode();
+        }
+    });
+}
+
+function frEp() {
+    let select = document.getElementById("challenge");
+    firstEpisodeChallenge = select.value;
+}
+
+function createChallenge() {
+    let miniChallengeScreen = new Scene();
+    miniChallengeScreen.clean();
+
+    if (episodeCount == 0) {
+        miniChallengeScreen.createButton("Proceed", "newEpisode()");
+    } else if (episodeCount === 1 && (regularFormat || all_stars || lipsync_assassin)
+        && !s6Premiere && !s9Premiere && !s12Premiere && !porkchopPremiere && !s14Premiere && !uk3Premiere && !ph2Premiere && !newImmTwst) {
+
+        switch (firstEpisodeChallenge) {
+            case "design":
+                miniChallengeScreen.createButton("Proceed", "designChallenge()");
+                break;
+            case "runway":
+                miniChallengeScreen.createButton("Proceed", "runwayChallenge()");
+                break;
+            case "talentshow":
+                miniChallengeScreen.createButton("Proceed", "talentshow()");
+                break;
+            case "girlgroup":
+                miniChallengeScreen.createButton("Proceed", "girlGroup()");
+                break;
+            case "comedy":
+                miniChallengeScreen.createButton("Proceed", "comedyChallenge()");
+                break;
+            case "rusical":
+                miniChallengeScreen.createButton("Proceed", "rusical()");
+                break;
+            case "ball":
+                miniChallengeScreen.createButton("Proceed", "ball()");
+                break;
+            case "makeover":
+                miniChallengeScreen.createButton("Proceed", "makeover()");
+                break;
+            default:
+                miniChallengeScreen.createButton("Proceed", "designChallenge()");
+                break;
+        }
+    } else {
+        normalChallenge();
+    }
+}
 function addQueenToAll(queen) {
     allQueens.push(queen);
 
