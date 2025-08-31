@@ -352,7 +352,26 @@ function showForceButtons() {
 }
 
 function injectDoubleShantay() {
-    let screen = new Scene();
+    if (all_stars === true) {
+		allStarsDoubleShantay();
+	} else {
+		regularDoubleShantay();
+	}
+}
+
+function createButtonLipsync() {
+	let screen = new Scene(); 
+	if ((s6Premiere || s12Premiere || porkchopPremiere || s14Premiere || ph2Premiere || newImmTwst) && premiereCounter < 3) {
+        screen.createButton("Proceed", "doublePremiere()");
+    } else if (CheckForReturning()) {
+        screen.createButton("Proceed", "returningQueenScreen()");
+	} else {
+        screen.createButton("Proceed", "untucked()");
+    }
+}
+
+function regularDoubleShantay() {
+	let screen = new Scene();
     screen.clean();
 
     for (let i = 0; i < bottomQueens.length; i++) {
@@ -385,14 +404,93 @@ function injectDoubleShantay() {
             }
         }
 
-        if ((s6Premiere || s12Premiere || porkchopPremiere || s14Premiere || ph2Premiere || newImmTwst) && premiereCounter < 3) {
-            screen.createButton("Proceed", "doublePremiere()");
-        } else if (CheckForReturning()) {
-            screen.createButton("Proceed", "returningQueenScreen()");
-        } else {
-            screen.createButton("Proceed", "untucked()");
-        }
+        createButtonLipsync();
     }
+}
+
+function allStarsDoubleShantay() {
+    let screen = new Scene();
+    screen.clean();
+
+    toAlots(top2, [], alotsSong);
+
+	if (top2[0].lipsyncScore == top2[1].lipsyncScore && top2[0].lipsyncScore > 6 && top2[1].lipsyncScore > 6 && currentCast.length > 6 && !noDouble) {
+		screen.createImage(top2[0].image, "darkblue");
+	    screen.createImage(top2[1].image, "darkblue");
+	    screen.createBold("Condragulations, you're both winners baby!");
+	
+	    top2[0].favoritism += 5;
+	    top2[0].ppe += 5;
+	    top2[1].favoritism += 5;
+	    top2[1].ppe += 5;
+	
+	    top2[0].addToTrackRecord(" WIN");
+	    top2[1].addToTrackRecord(" WIN");
+	
+	    screen.createHorizontalLine();
+
+		assasintable.push(top2[0].getName() + " & " + top2[1].getName());
+		assasinlipstick.push(top2[0].lipstick.getName());
+    	assasintable.push(" ");
+		assasinlipstick.push(top2[1].lipstick.getName());
+	} else {
+        toAlots([top2[0]], [top2[1]], alotsSong);
+        isLSShowable = true;
+
+        top2[0].favoritism += 5;
+        top2[0].ppe += 5;
+        top2[0].addToTrackRecord("WIN");
+
+        if (immunityTwist && giveImmunity()) {
+            top2[0].immune = true;
+            top2[0].immuneEp.push(episodeCount);
+            screen.createImage(top2[0].image, "royalblue");
+            screen.createBold(top2[0].getName() + ", you're a winner, baby! You have also earned immunity for next week's challenge.");
+        } else if (newImmTwst && gives16Imm()) {
+            top2[0].immPotion = true;
+            screen.createImage(top2[0].image, "royalblue");
+            screen.createBold(top2[0].getName() + ", you're a winner baby! You've won immunity from a future elimination!");
+        } else {
+            screen.createImage(top2[0].image, "royalblue");
+            screen.createBold(top2[0].getName() + ", you're a winner, baby!");
+        }
+
+        if (conjoinedQueens && conjoinedCheck) {
+            conjoinedReturn(top2[0]);
+            conjoinedCheck = false;
+        }
+
+        top2[1].addToTrackRecord("WIN ");
+        top2[1].favoritism += 4;
+        top2[1].ppe += 5;
+
+        assasintable.push(top2[0].getName());
+        assasinlipstick.push(top2[0].lipstick.getName());
+        assasintable.push(top2[1].getName());
+        assasinlipstick.push(top2[1].lipstick.getName());
+
+        screen.createImage(top2[1].image, "cyan");
+        screen.createParagraph(top2[1].getName() + ", you are safe.");
+    }
+
+    if (conjoinedQueens && conjoinedCheck) {
+        conjoinedReturn(top2[0], top2[1]);
+        conjoinedCheck = false;
+    }
+	
+    let names = "";
+    for (let i = 0; i < bottomQueens.length; i++) {
+         screen.createImage(bottomQueens[i].image, "red");
+        names += bottomQueens[i].getName() + ". ";
+   }
+    screen.createBold(names);
+    screen.createParagraph("I'm going to give a second chance to... All of you...");
+    screen.createBold("Shantay you all stay!");
+    screen.createHorizontalLine();
+    assasinlipstick.push(top2[0].lipstick.getName() + " & " + top2[1].lipstick.getName());
+    assasinlipstick.push(" ");
+
+    createButtonLipsync();
 }
 
 function injectDoubleSashay() {
@@ -425,11 +523,5 @@ function injectDoubleSashay() {
 
     doubleSashay = true;
 
-    if ((s6Premiere || s12Premiere || porkchopPremiere || s14Premiere || ph2Premiere || newImmTwst) && premiereCounter < 3) {
-        screen.createButton("Proceed", "doublePremiere()");
-    } else if (CheckForReturning()) {
-        screen.createButton("Proceed", "returningQueenScreen()");
-	} else {
-        screen.createButton("Proceed", "untucked()");
-    }
+	createButtonLipsync();
 }
