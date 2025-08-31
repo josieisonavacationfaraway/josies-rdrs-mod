@@ -321,47 +321,48 @@ asLipsyncDesc = function(...args) {
 
 function showForceButtons() {
     const container = document.getElementById("MainBlock");
+    if (!container) return;
 
+    // Remove old buttons if present
     const oldShantay = document.getElementById("doubleShantayBtn");
     const oldSashay = document.getElementById("doubleSashayBtn");
     if (oldShantay) oldShantay.remove();
     if (oldSashay) oldSashay.remove();
 
+    // Create Shantay button
     const shantayBtn = document.createElement("button");
-	let sashayBtn;
     shantayBtn.id = "doubleShantayBtn";
     shantayBtn.textContent = "Double Shantay";
+
+    let sashayBtn = null;
+    if (all_stars === false) {
+        sashayBtn = document.createElement("button");
+        sashayBtn.id = "doubleSashayBtn";
+        sashayBtn.textContent = "Double Sashay";
+        sashayBtn.onclick = () => {
+            injectDoubleSashay();
+            shantayBtn.remove();
+            sashayBtn.remove();
+        };
+    }
+
     shantayBtn.onclick = () => {
-		injectDoubleShantay();
+        injectDoubleShantay();
         shantayBtn.remove();
-        sashayBtn.remove();
+        if (sashayBtn) sashayBtn.remove();
     };
 
-	if (all_stars === false) {
-	    sashayBtn = document.createElement("button");
-	    sashayBtn.id = "doubleSashayBtn";
-	    sashayBtn.textContent = "Double Sashay";
-	    sashayBtn.onclick = () => {
-	        shantayBtn.remove();
-	        sashayBtn.remove();
-	        injectDoubleSashay();
-	    };
-	}
-  
+    // Insert buttons before Proceed if it exists
     const proceedBtn = Array.from(container.querySelectorAll("button"))
         .find(btn => btn.textContent.trim() === "Proceed");
 
     if (proceedBtn) {
-    	proceedBtn.insertAdjacentElement("beforebegin", shantayBtn);
-    	if (all_stars === false) {
-        	proceedBtn.insertAdjacentElement("beforebegin", sashayBtn);
-    	}
-	} else {
-	    container.appendChild(shantayBtn);
-	    if (all_stars === false) {
-	        proceedBtn.insertAdjacentElement("beforebegin", sashayBtn);
-	    }
-	}
+        proceedBtn.insertAdjacentElement("beforebegin", shantayBtn);
+        if (sashayBtn) proceedBtn.insertAdjacentElement("beforebegin", sashayBtn);
+    } else {
+        container.appendChild(shantayBtn);
+        if (sashayBtn) container.appendChild(sashayBtn);
+    }
 }
 
 function injectDoubleShantay() {
