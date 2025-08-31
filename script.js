@@ -212,7 +212,7 @@ document.addEventListener("DOMContentLoaded", () => {
 });
 
 if (window.location.pathname.endsWith("index.html")) {
-	UK7_Cast .forEach(q => addQueenToAll(q));
+	UK7_Cast.forEach(q => addQueenToAll(q));
 }
 
 if (window.location.pathname.endsWith("predef.html")) {
@@ -336,31 +336,32 @@ function showForceButtons() {
         injectDoubleShantay();
     };
 
-	if (all_stars === fale) {
-		const sashayBtn = document.createElement("button");
+	let sashayBtn;
+	if (all_stars === false) {
+	    sashayBtn = document.createElement("button");
 	    sashayBtn.id = "doubleSashayBtn";
 	    sashayBtn.textContent = "Double Sashay";
 	    sashayBtn.onclick = () => {
 	        shantayBtn.remove();
 	        sashayBtn.remove();
 	        injectDoubleSashay();
-		};
-	}   
-
+	    };
+	}
+  
     const proceedBtn = Array.from(container.querySelectorAll("button"))
         .find(btn => btn.textContent.trim() === "Proceed");
 
     if (proceedBtn) {
-        proceedBtn.insertAdjacentElement("beforebegin", shantayBtn);
-        if (all_stars === false) {
-			proceedBtn.insertAdjacentElement("beforebegin", sashayBtn);
-		}
-    } else {
-        container.appendChild(shantayBtn);
-        if (all_stars === false) {
-			proceedBtn.insertAdjacentElement("beforebegin", sashayBtn);
-		}
-    }
+    	proceedBtn.insertAdjacentElement("beforebegin", shantayBtn);
+    	if (all_stars === false) {
+        	proceedBtn.insertAdjacentElement("beforebegin", sashayBtn);
+    	}
+	} else {
+	    container.appendChild(shantayBtn);
+	    if (all_stars === false) {
+	        proceedBtn.insertAdjacentElement("beforebegin", sashayBtn);
+	    }
+	}
 }
 
 function injectDoubleShantay() {
