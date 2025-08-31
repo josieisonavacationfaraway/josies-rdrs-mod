@@ -328,15 +328,15 @@ function showForceButtons() {
     if (oldSashay) oldSashay.remove();
 
     const shantayBtn = document.createElement("button");
+	let sashayBtn;
     shantayBtn.id = "doubleShantayBtn";
     shantayBtn.textContent = "Double Shantay";
     shantayBtn.onclick = () => {
+		injectDoubleShantay();
         shantayBtn.remove();
         sashayBtn.remove();
-        injectDoubleShantay();
     };
 
-	let sashayBtn;
 	if (all_stars === false) {
 	    sashayBtn = document.createElement("button");
 	    sashayBtn.id = "doubleSashayBtn";
