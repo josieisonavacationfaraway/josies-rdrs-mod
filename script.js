@@ -307,23 +307,19 @@ if (window.location.pathname.endsWith("predef.html")) {
 }
 
 // - FORCE RESULTS - //
-document.addEventListener("DOMContentLoaded", () => {
-    if (typeof lipsyncDesc === "function") {
-        const originalLipSync = lipsyncDesc;
-        lipsyncDesc = function(...args) {
-            originalLipSync.apply(this, args);
-            showForceButtons();
-        };
-    }
-
-    if (typeof asLipsyncDesc === "function") {
-        const originalASLipSync = asLipsyncDesc;
-        asLipsyncDesc = function(...args) {
-            originalASLipSync.apply(this, args);
-            showForceButtons();
-        };
-    }
-});
+if (all_stars == true) {
+    const originalASLipSync = asLipsyncDesc;
+    asLipsyncDesc = function(...args) {
+        originalASLipSync.apply(this, args);
+		showForceButtons();
+    };
+} else {
+    const originalLipSync = lipsyncDesc;
+    lipsyncDesc = function(...args) {
+		originalLipSync.apply(this, args);
+        showForceButtons();
+    };
+}
 
 function showForceButtons() {
     const container = document.getElementById("MainBlock");
