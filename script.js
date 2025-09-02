@@ -1,3 +1,20 @@
+// - AESTHETICS - //
+Object.defineProperty(document.body.style, 'backgroundImage', {
+    set: function(value) {
+        if (value.includes('werkroom.webp')) {
+            console.log('Replacing backgroundImage:', value);
+            originalDescriptor.set.call(this, "url('https://static.wikia.nocookie.net/logosrupaulsdragrace/images/4/47/S17MainStage1.png')");
+        } else {
+            originalDescriptor.set.call(this, value);
+        }
+    },
+    get: function() {
+        return originalDescriptor.get.call(this);
+    },
+    configurable: true,
+    enumerable: true
+});
+
 // - BUG FIXING - //
 function addQueenToAll(queen) {
     allQueens.push(queen);
