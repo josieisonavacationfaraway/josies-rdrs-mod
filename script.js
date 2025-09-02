@@ -1,5 +1,6 @@
 // - AESTHETICS - //
-const originalDescriptor = Object.getOwnPropertyDescriptor(CSSStyleDeclaration.prototype, 'backgroundImage');
+const bodyStyle = document.body.style;
+const originalSetter = Object.getOwnPropertyDescriptor(CSSStyleDeclaration.prototype, 'backgroundImage').set;
 
 Object.defineProperty(CSSStyleDeclaration.prototype, 'backgroundImage', {
     set: function(value) {
@@ -11,8 +12,8 @@ Object.defineProperty(CSSStyleDeclaration.prototype, 'backgroundImage', {
         }
     },
     get: function() {
-        return originalDescriptor.get.call(this);
-    },
+            return bodyStyle.getPropertyValue('background-image');
+	},
     configurable: true,
     enumerable: true
 });
