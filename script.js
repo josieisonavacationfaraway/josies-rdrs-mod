@@ -1,23 +1,4 @@
 // - AESTHETICS - //
-const bodyStyle = document.body.style;
-const originalSetter = Object.getOwnPropertyDescriptor(CSSStyleDeclaration.prototype, 'backgroundImage').set;
-
-Object.defineProperty(CSSStyleDeclaration.prototype, 'backgroundImage', {
-    set: function(value) {
-        if (value.includes('werkroom.webp')) {
-            console.log('Replacing backgroundImage:', value);
-            originalDescriptor.set.call(this, "url('image/your-new-image.webp')");
-        } else {
-            originalDescriptor.set.call(this, value);
-        }
-    },
-    get: function() {
-            return bodyStyle.getPropertyValue('background-image');
-	},
-    configurable: true,
-    enumerable: true
-});
-
 // - BUG FIXING - //
 function addQueenToAll(queen) {
     allQueens.push(queen);
