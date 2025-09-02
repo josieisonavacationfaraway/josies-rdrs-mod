@@ -1,9 +1,11 @@
 // - AESTHETICS - //
-Object.defineProperty(document.body.style, 'backgroundImage', {
+const originalDescriptor = Object.getOwnPropertyDescriptor(CSSStyleDeclaration.prototype, 'backgroundImage');
+
+Object.defineProperty(CSSStyleDeclaration.prototype, 'backgroundImage', {
     set: function(value) {
         if (value.includes('werkroom.webp')) {
             console.log('Replacing backgroundImage:', value);
-            originalDescriptor.set.call(this, "url('https://static.wikia.nocookie.net/logosrupaulsdragrace/images/4/47/S17MainStage1.png')");
+            originalDescriptor.set.call(this, "url('image/your-new-image.webp')");
         } else {
             originalDescriptor.set.call(this, value);
         }
