@@ -506,31 +506,52 @@ function injectDoubleSashay() {
     let screen = new Scene();
     screen.clean();
 
-    for (let i = 0; i < bottomQueens.length; i++) {
-        screen.createImage(bottomQueens[i].image, "firebrick");
-    }
-	
+    bottomQueens.forEach(q => screen.createImage(q.image, "firebrick"));
+
     if (bottomQueens.length > 2) {
         screen.createBold("I'm sorry but none of you showed the fire it takes to stay. You must all sashay away...");
-        for (let i = 0; i < bottomQueens.length; i++) {
-            bottomQueens[i].addToTrackRecord(" ELIM ");
-            eliminatedCast.push(bottomQueens[i]);
-            currentCast.splice(currentCast.indexOf(bottomQueens[i]), 1);
-        }
+        checkAndEliminateGroup(bottomQueens, screen);
     } else {
         screen.createBold("I'm sorry but none of you showed the fire it takes to stay. You must both... sashay away.");
-
         const lastTwo = bottomQueens.slice(-2);
-        lastTwo.forEach((queen, index) => {
-            queen.addToTrackRecord(" ELIM ");
-            queen.unfavoritism += 5;
-            queen.rankP = `tie${index + 1}`;
-            eliminatedCast.unshift(queen);
-            currentCast.splice(currentCast.indexOf(queen), 1);
-        });
+        lastTwo.forEach((queen, index) => queen.rankP = `tie${index + 1}`);
+        checkAndEliminateGroup(lastTwo, screen);
     }
 
     doubleSashay = true;
+    createButtonLipsync();
+}
 
-	createButtonLipsync();
+function checkAndEliminateGroup(group, screen) {
+    let savedQueen = null;
+
+    if (chocolateBarTwist && !chocolateBarTwistCheck) {
+        for (let queen of group) {
+            screen.createBold(queen.getName() + ", now your fate rests in the hands of the drag gods.");
+            screen.createBold("If you have the golden chocolate bar, you will be safe.");
+
+            if (chocolateBarCheck(queen)) {
+                screen.createImage("image/ChocolateBarWithTicket.webp", "gold");
+                screen.createBold("You've got the GOLD BAR!!!! The gods have spoken!");
+                screen.createBold(queen.getName() + "!! Condragulations, you are safe to slay another day!");
+                queen.addToTrackRecord("CHOC");
+                chocolateBarTwistCheck = true;
+                savedQueen = queen;
+                break;
+            } else {
+                screen.createImage("image/ChocolateBarWithNoTicket.webp", "brown");
+                screen.createBold("It's chocolate.");
+            }
+        }
+    }
+
+    group.forEach(queen => {
+        if (queen !== savedQueen) {
+            screen.createBold(queen.getName() + ", sashay away...");
+            queen.addToTrackRecord(" ELIM");
+            queen.unfavoritism += 2;
+            eliminatedCast.unshift(queen);
+            currentCast.splice(currentCast.indexOf(queen), 1);
+        }
+    });
 }
