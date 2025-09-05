@@ -520,10 +520,9 @@ function injectDoubleSashay() {
     } else {
         screen.createBold("I'm sorry but none of you showed the fire it takes to stay. You must both... sashay away.");
 
-        const lastTwo = bottomQueens.slice(-2);
-        lastTwo.forEach((queen, index) => {
-            handleChocolateBarElimination(queen, screen);
-        });
+        for (let i = 0; i < bottomQueens.length; i++) {
+            handleChocolateBarElimination(bottomQueens[i], screen);
+        }
     }
 
     doubleSashay = true;
@@ -536,6 +535,7 @@ function handleChocolateBarElimination(queen, screen) {
         screen.createBold("If you have the golden chocolate bar, you will be safe.");
 
         if (chocolateBarCheck(queen)) {
+			screen.createImage(queen.image, "black");
             screen.createImage("image/ChocolateBarWithTicket.webp", "gold");
             screen.createBold("You've got the GOLD BAR!!!! The gods have spoken!");
             screen.createBold(queen.getName() + "!! Condragulations, you are safe to slay another day!");
@@ -543,11 +543,13 @@ function handleChocolateBarElimination(queen, screen) {
             chocolateBarTwistCheck = true;
             return;
         } else {
+			screen.createImage(queen.image, "black");
             screen.createImage("image/ChocolateBarWithNoTicket.webp", "brown");
             screen.createBold("It's chocolate.");
         }
     }
 
+	screen.create
     screen.createBold(queen.getName() + ", sashay away...");
 	if (bottomQueens.length > 2) {
 		queen.addToTrackRecord(" ELIM ");
