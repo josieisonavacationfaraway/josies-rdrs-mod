@@ -1,5 +1,39 @@
 // - AESTHETICS - //
-console.log("NEWEST version, 10:07 update");
+console.log("NEWEST version, 10:16 update");
+
+const originalContestantProgress = window.contestantProgress;
+
+window.contestantProgress = function() {
+    originalContestantProgress.apply(this, arguments);
+
+    let rows = document.querySelectorAll("tr.trackRecord");
+
+    rows.forEach((row, i) => {
+        let rankCell = row.querySelector("td");
+        let place = eliminatedCast[i]?.rankP;
+
+        if (typeof place === "string" && place.startsWith("tie")) {
+            let range = place.replace("tie", "");
+            let parts = range.split("-");
+            if (parts.length === 2) {
+                let start = parseInt(parts[0]);
+                let end = parseInt(parts[1]);
+                rankCell.innerHTML = `${ordinal(start)}–${ordinal(end)}`;
+            } else {
+                let single = parseInt(parts[0]);
+                rankCell.innerHTML = ordinal(single);
+            }
+        }
+    });
+};
+
+function ordinal(n) {
+    let s = ["th", "st", "nd", "rd"],
+        v = n % 100;
+    return n + (s[(v - 20) % 10] || s[v] || s[0]);
+}
+
+
 // - BUG FIXING - //
 function addQueenToAll(queen) {
     allQueens.push(queen);
@@ -556,6 +590,9 @@ function handleChocolateBarElimination(queen, screen, index, totalBatch) {
         }
     }
 
+	if ((!chocolateBarTwistCheck && chocolateBarTwist) || !chocolateBarTwist) {
+		screen.createImage(queen.image, "black");
+	}
     screen.createBold(queen.getName() + ", sashay away...");
 
     let placementNumber = currentCast.length;
