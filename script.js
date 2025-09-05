@@ -320,6 +320,12 @@ if (all_stars == true) {
 		originalLipSync.apply(this, args);
         showForceButtons();
     };
+
+	const originalBottom6 = bottom6;
+    bottom6 = function(...args) {
+        originalBottom6.apply(this, args);
+        showForceButtons();
+    };
 }
 
 function showForceButtons() {
@@ -386,7 +392,7 @@ function regularDoubleShantay() {
     }
 
     if (bottomQueens.length > 2) {
-        screen.createBold("Condragulations, shantay you all stay!!");
+        screen.createBold("Condragulations, shantay you all stay!");
     } else {
         screen.createBold("Condragulations, shantay you both stay!");
     }
