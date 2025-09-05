@@ -548,8 +548,7 @@ function handleChocolateBarElimination(queen, screen) {
             screen.createBold("It's chocolate.");
         }
     }
-
-	screen.create
+	
     screen.createBold(queen.getName() + ", sashay away...");
 	if (bottomQueens.length > 2) {
 		queen.addToTrackRecord(" ELIM ");
