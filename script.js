@@ -1,4 +1,5 @@
 // - AESTHETICS - //
+console.log("NEWEST version, 10:07 update");
 // - BUG FIXING - //
 function addQueenToAll(queen) {
     allQueens.push(queen);
@@ -535,13 +536,13 @@ function injectDoubleSashay() {
     createButtonLipsync();
 }
 
-function handleChocolateBarElimination(queen, screen) {
+function handleChocolateBarElimination(queen, screen, index, totalBatch) {
     if (chocolateBarTwist && !chocolateBarTwistCheck) {
         screen.createBold(queen.getName() + ", now your fate rests in the hands of the drag gods.");
         screen.createBold("If you have the golden chocolate bar, you will be safe.");
 
         if (chocolateBarCheck(queen)) {
-			screen.createImage(queen.image, "black");
+            screen.createImage(queen.image, "black");
             screen.createImage("image/ChocolateBarWithTicket.webp", "gold");
             screen.createBold("You've got the GOLD BAR!!!! The gods have spoken!");
             screen.createBold(queen.getName() + "!! Condragulations, you are safe to slay another day!");
@@ -549,20 +550,23 @@ function handleChocolateBarElimination(queen, screen) {
             chocolateBarTwistCheck = true;
             return;
         } else {
-			screen.createImage(queen.image, "black");
+            screen.createImage(queen.image, "black");
             screen.createImage("image/ChocolateBarWithNoTicket.webp", "brown");
             screen.createBold("It's chocolate.");
         }
     }
-	
+
     screen.createBold(queen.getName() + ", sashay away...");
-	if (bottomQueens.length > 2) {
-		queen.addToTrackRecord(" ELIM ");
-		queen.rankP = `tie${index + 1}`;
-	} else {
-		queen.addToTrackRecord("ELIM");
-	}
-    
+
+    let placementNumber = currentCast.length;
+    if (bottomQueens.length > 2) {
+        queen.addToTrackRecord(" ELIM ");
+        queen.rankP = `tie${placementNumber - totalBatch + 1}-${placementNumber}`;
+    } else {
+        queen.addToTrackRecord("ELIM");
+        queen.rankP = placementNumber.toString();
+    }
+
     queen.unfavoritism += 2;
     eliminatedCast.unshift(queen);
     currentCast.splice(currentCast.indexOf(queen), 1);
