@@ -1,11 +1,6 @@
 // - AESTHETICS - //
-console.log("NEWEST version, 10:16 update");
+console.log("NEWEST version, 10:42 update");
 
-// ------------------------------
-// YKK TrackRecord Tie Mod
-// ------------------------------
-
-// helper for ordinal suffix
 function ordinal(n) {
     let s = ["th", "st", "nd", "rd"],
         v = n % 100;
