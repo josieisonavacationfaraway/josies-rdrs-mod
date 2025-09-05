@@ -1,14 +1,46 @@
 // - AESTHETICS - //
 console.log("NEWEST version, 10:16 update");
 
+// ------------------------------
+// YKK TrackRecord Tie Mod
+// ------------------------------
+
+// helper for ordinal suffix
+function ordinal(n) {
+    let s = ["th", "st", "nd", "rd"],
+        v = n % 100;
+    return n + (s[(v - 20) % 10] || s[v] || s[0]);
+}
+
 const originalContestantProgress = window.contestantProgress;
 
 window.contestantProgress = function() {
     originalContestantProgress.apply(this, arguments);
 
-    let rows = document.querySelectorAll("tr.trackRecord");
+    setTimeout(() => {
+        let rows = document.querySelectorAll("tr.trackRecord");
 
-    rows.forEach((row, i) => {
+        rows.forEach((row, i) => {
+            let rankCell = row.querySelector("td");
+            let place = eliminatedCast[i]?.rankP;
+
+            if (typeof place === "string" && place.startsWith("tie")) {
+                let range = place.replace("tie", "");
+                let parts = range.split("-");
+                if (parts.length === 2) {
+                    let start = parseInt(parts[0]);
+                    let end = parseInt(parts[1]);
+                    rankCell.innerHTML = `${ordinal(start)}–${ordinal(end)}`;
+                } else {
+                    let single = parseInt(parts[0]);
+                    rankCell.innerHTML = ordinal(single);
+                }
+            }
+        });
+    }, 0); 
+
+const observer = new MutationObserver(() => {
+    document.querySelectorAll("tr.trackRecord").forEach((row, i) => {
         let rankCell = row.querySelector("td");
         let place = eliminatedCast[i]?.rankP;
 
@@ -20,19 +52,13 @@ window.contestantProgress = function() {
                 let end = parseInt(parts[1]);
                 rankCell.innerHTML = `${ordinal(start)}–${ordinal(end)}`;
             } else {
-                let single = parseInt(parts[0]);
-                rankCell.innerHTML = ordinal(single);
+                rankCell.innerHTML = ordinal(parseInt(parts[0]));
             }
         }
     });
-};
+});
 
-function ordinal(n) {
-    let s = ["th", "st", "nd", "rd"],
-        v = n % 100;
-    return n + (s[(v - 20) % 10] || s[v] || s[0]);
-}
-
+observer.observe(document.body, { childList: true, subtree: true });
 
 // - BUG FIXING - //
 function addQueenToAll(queen) {
