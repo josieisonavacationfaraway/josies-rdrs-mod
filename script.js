@@ -522,7 +522,6 @@ function injectDoubleSashay() {
 
         const lastTwo = bottomQueens.slice(-2);
         lastTwo.forEach((queen, index) => {
-            queen.rankP = `tie${index + 1}`;
             handleChocolateBarElimination(queen, screen);
         });
     }
@@ -552,6 +551,7 @@ function handleChocolateBarElimination(queen, screen) {
     screen.createBold(queen.getName() + ", sashay away...");
 	if (bottomQueens.length > 2) {
 		queen.addToTrackRecord(" ELIM ");
+		queen.rankP = `tie${index + 1}`;
 	} else {
 		queen.addToTrackRecord("ELIM");
 	}
