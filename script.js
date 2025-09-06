@@ -1,104 +1,3 @@
-// ===== CUSTOM CAST SYSTEM (QUEENS FROM allQueens) =====
-let customCasts = JSON.parse(localStorage.getItem("customCasts") || "[]");
-
-function saveCustomCasts() {
-    localStorage.setItem("customCasts", JSON.stringify(customCasts.map(cast => ({
-        name: cast.name,
-        queenNames: cast.queens.map(q => q._name)
-    }))));
-    renderCustomCasts();
-}
-
-function loadCustomCasts() {
-    const stored = JSON.parse(localStorage.getItem("customCasts") || "[]");
-    customCasts = stored.map(cast => ({
-        name: cast.name,
-        queens: cast.queenNames.map(qName => allQueens.find(q => q._name === qName)).filter(Boolean)
-    }));
-}
-
-function createNewCast() {
-    const name = prompt("Enter cast name:");
-    if (!name) return;
-    customCasts.push({ name, queens: [] });
-    saveCustomCasts();
-}
-
-function addQueenToCast(castIndex) {
-    const queenNames = allQueens.map(q => q._name);
-    const selection = prompt(`Enter queen name to add:\nAvailable: ${queenNames.join(", ")}`);
-    if (!selection) return;
-
-    const queen = allQueens.find(q => q._name === selection);
-    if (!queen) return alert("Queen not found!");
-    if (customCasts[castIndex].queens.includes(queen)) return alert("Queen already in this cast!");
-
-    customCasts[castIndex].queens.push(queen);
-    saveCustomCasts();
-}
-
-function removeQueenFromCast(castIndex, queenIndex) {
-    customCasts[castIndex].queens.splice(queenIndex, 1);
-    saveCustomCasts();
-}
-
-function deleteCast(castIndex) {
-    if (confirm("Delete this cast?")) {
-        customCasts.splice(castIndex, 1);
-        saveCustomCasts();
-    }
-}
-
-function renderCustomCasts() {
-    const container = document.getElementById("customCastsContainer");
-    if (!container) return;
-
-    container.innerHTML = "";
-    customCasts.forEach((cast, i) => {
-        const div = document.createElement("div");
-        div.className = "cast-container";
-        div.innerHTML = `
-          <div class="cast-header">
-            <h2>${cast.name}</h2>
-            <div>
-              <button onclick="addQueenToCast(${i})">➕ Add Queen</button>
-              <button onclick="deleteCast(${i})">🗑️ Delete Cast</button>
-            </div>
-          </div>
-        `;
-
-        cast.queens.forEach((queen, j) => {
-            const qDiv = document.createElement("div");
-            qDiv.className = "queen";
-            qDiv.innerHTML = `
-              <img src="${queen.image}" width="40" height="40" style="border-radius:50%;object-fit:cover;margin-right:6px;">
-              <span>${queen._name}</span>
-              <button onclick="removeQueenFromCast(${i}, ${j})">❌ Remove</button>
-            `;
-            div.appendChild(qDiv);
-        });
-
-        container.appendChild(div);
-    });
-}
-
-// Add container to DOM once page loads
-document.addEventListener("DOMContentLoaded", () => {
-    const main = document.querySelector("main") || document.body;
-    const customSection = document.createElement("section");
-    customSection.id = "customCastsSection";
-    customSection.innerHTML = `
-        <h1>🎭 CUSTOM CASTS 🎭</h1>
-        <button onclick="createNewCast()">➕ New Cast</button>
-        <div id="customCastsContainer"></div>
-    `;
-    main.prepend(customSection);
-
-    loadCustomCasts();
-    renderCustomCasts();
-});
-
-
 // - BUG FIXING - //
 function addQueenToAll(queen) {
     allQueens.push(queen);
@@ -660,12 +559,7 @@ function handleChocolateBarElimination(queen, screen, index, totalBatch) {
 	}
     screen.createBold(queen.getName() + ", sashay away...");
 
-    let placementNumber = currentCast.length;
-    if (bottomQueens.length > 2) {
-        queen.addToTrackRecord(" ELIM ");
-    } else {
-        queen.addToTrackRecord("ELIM");
-    }
+    queen.addToTrackRecord(" ELIM ");
 	queen.rankP = "tie2"
 
     queen.unfavoritism += 2;
