@@ -1,4 +1,3 @@
-// - AESTHETICS - //
 console.log("NEWEST version, 10:42 update");
 
 // - BUG FIXING - //
@@ -565,11 +564,10 @@ function handleChocolateBarElimination(queen, screen, index, totalBatch) {
     let placementNumber = currentCast.length;
     if (bottomQueens.length > 2) {
         queen.addToTrackRecord(" ELIM ");
-        queen.rankP = `tie${placementNumber - totalBatch + 1}-${placementNumber}`;
     } else {
         queen.addToTrackRecord("ELIM");
-        queen.rankP = placementNumber.toString();
     }
+	queen.rankP = "tie2"
 
     queen.unfavoritism += 2;
     eliminatedCast.unshift(queen);
