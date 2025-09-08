@@ -1,3 +1,18 @@
+// - AESTHETICS - //
+const style = document.createElement("style");
+style.textContent = `
+    .card {
+	    border: none;
+	    cursor: pointer;
+	    margin: 1rem;
+	    border-radius: 15px;
+	    background: #ff6ba986;
+	    box-shadow: 0 0 10px #5d0c2e30;
+	}
+`;
+document.head.appendChild(style);
+
+
 // - BUG FIXING - //
 function addQueenToAll(queen) {
     allQueens.push(queen);
