@@ -229,6 +229,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
 if (window.location.pathname.endsWith("index.html")) {
 	UK7_Cast.forEach(q => addQueenToAll(q));
+	ES5_Cast.forEach(q => addQueenToAll(q));
 }
 
 if (window.location.pathname.endsWith("predef.html")) {
@@ -315,7 +316,7 @@ if (window.location.pathname.endsWith("predef.html")) {
                 </div>
             `;
 
-            ukSeasons.appendChild(newSeason);
+            esSeasons.appendChild(newSeason);
         }
     }
 
