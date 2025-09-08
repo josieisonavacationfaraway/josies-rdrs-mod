@@ -257,7 +257,7 @@ if (window.location.pathname.endsWith("predef.html")) {
         newSeason.className = "content-season";
         newSeason.innerHTML = `
             <h3 class="content-season-title">PH Slaysian Royale</h3>
-            <button onclick="predefCast(SLAYSIAN_Cast, 'all-stars', 'LFTC')">Simulate</button>
+            <button onclick="predefCast(SLAYSIAN_Cast, 'all-stars', '')">Simulate</button>
             <div class="content-season_overlay" aria-hidden="true" id="phslaysian"
                 style="background: linear-gradient(-10deg, rgba(247, 25, 154, 0.6) 15%, rgba(235, 13, 187, 0.6) 100%) 
                 center center / cover no-repeat, 
@@ -308,7 +308,7 @@ if (window.location.pathname.endsWith("predef.html")) {
             newSeason.className = "content-season";
             newSeason.innerHTML = `
                 <h3 class="content-season-title">ES Season 5</h3>
-                <button onclick="predefCast(ES5_Cast, 'regular', 'lftc', 'slayers-premiere')">Simulate</button>
+                <button onclick="predefCast(ES5_Cast, 'regular', 'LFTC', 'slayers-premiere')">Simulate</button>
                 <div class="content-season_overlay" aria-hidden="true" id="ukseason7" 
                     style="background: linear-gradient(-10deg, rgba(247, 25, 154, 0.6) 15%, rgba(235, 13, 187, 0.6) 100%) 
                     center center / cover no-repeat, 
