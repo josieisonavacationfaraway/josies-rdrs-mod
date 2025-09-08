@@ -43,20 +43,36 @@ document.addEventListener("DOMContentLoaded", () => {
 });
 
 // - UK 7 CAST - //
-let BonesUK7 = new Queen("Bones", 7, 7, 7, 7, 7, 7, 7, "https://static.wikia.nocookie.net/logosrupaulsdragrace/images/a/ad/BonesDRUK7CastMug.jpg", true);
-let BonnieAnnClydeUK7 = new Queen("Bonnie Ann Clyde", 7, 7, 7, 7, 7, 7, 7, "https://static.wikia.nocookie.net/logosrupaulsdragrace/images/3/3d/BonnieAnnClydeDRUK7CastMug.jpg", true);
-let CatrinFeelingsUK7 = new Queen("Catrin Feelings", 7, 7, 7, 7, 7, 7, 7, "https://static.wikia.nocookie.net/logosrupaulsdragrace/images/5/57/CatrinFeelingsDRUK7CastMug.jpg", true);
-let ChaiTGrandeUK7 = new Queen("Chai T. Grande", 7, 7, 7, 7, 7, 7, 7, "https://static.wikia.nocookie.net/logosrupaulsdragrace/images/4/4c/ChaiTGrandeDRUK7CastMug.jpg", true);
-let ElleVosqueUK7 = new Queen("Elle Vosque", 7, 7, 7, 7, 7, 7, 7, "https://static.wikia.nocookie.net/logosrupaulsdragrace/images/1/1f/ElleVosqueDRUK7CastMug.jpg", true);
-let NyongbellaUK7 = new Queen("Nyongbella", 7, 7, 7, 7, 7, 7, 7, "https://static.wikia.nocookie.net/logosrupaulsdragrace/images/0/02/NyongbellaDRUK7CastMug.jpg", true);
-let PaigeThreeUK7 = new Queen("Paige Three", 7, 7, 7, 7, 7, 7, 7, "https://static.wikia.nocookie.net/logosrupaulsdragrace/images/3/3f/PaigeThreeDRUK7CastMug.jpg", true);
-let PastyUK7 = new Queen("Pasty", 7, 7, 7, 7, 7, 7, 7, "https://static.wikia.nocookie.net/logosrupaulsdragrace/images/b/bf/PastyDRUK7CastMug.jpg", true);
-let SallyTMUK7 = new Queen("Sally™", 7, 7, 7, 7, 7, 7, 7, "https://static.wikia.nocookie.net/logosrupaulsdragrace/images/5/56/Sally%E2%84%A2DRUK7CastMug.jpg", true);
-let SilllexaDictionUK7 = new Queen("Silllexa Diction", 7, 7, 7, 7, 7, 7, 7, "https://static.wikia.nocookie.net/logosrupaulsdragrace/images/c/cb/SilllexaDictionDRUK7CastMug.jpg", true);
-let TayrisMongardiUK7 = new Queen("Tayris Mongardi", 7, 7, 7, 7, 7, 7, 7, "https://static.wikia.nocookie.net/logosrupaulsdragrace/images/e/e9/TayrisMongardiDRUK7CastMug.jpg", true);
-let ViolaUK7 = new Queen("Viola", 7, 7, 7, 7, 7, 7, 7, "https://static.wikia.nocookie.net/logosrupaulsdragrace/images/7/7d/ViolaDRUK7CastMug.jpg", true);
+let BonesUK7 = new Queen("Bones", 7, 7, 7, 7, 7, 7, 7, "https://static.wikia.nocookie.net/logosrupaulsdragrace/images/a/ad/BonesDRUK7CastMug.jpg");
+let BonnieAnnClydeUK7 = new Queen("Bonnie Ann Clyde", 7, 7, 7, 7, 7, 7, 7, "https://static.wikia.nocookie.net/logosrupaulsdragrace/images/3/3d/BonnieAnnClydeDRUK7CastMug.jpg");
+let CatrinFeelingsUK7 = new Queen("Catrin Feelings", 7, 7, 7, 7, 7, 7, 7, "https://static.wikia.nocookie.net/logosrupaulsdragrace/images/5/57/CatrinFeelingsDRUK7CastMug.jpg");
+let ChaiTGrandeUK7 = new Queen("Chai T. Grande", 7, 7, 7, 7, 7, 7, 7, "https://static.wikia.nocookie.net/logosrupaulsdragrace/images/4/4c/ChaiTGrandeDRUK7CastMug.jpg");
+let ElleVosqueUK7 = new Queen("Elle Vosque", 7, 7, 7, 7, 7, 7, 7, "https://static.wikia.nocookie.net/logosrupaulsdragrace/images/1/1f/ElleVosqueDRUK7CastMug.jpg");
+let NyongbellaUK7 = new Queen("Nyongbella", 7, 7, 7, 7, 7, 7, 7, "https://static.wikia.nocookie.net/logosrupaulsdragrace/images/0/02/NyongbellaDRUK7CastMug.jpg");
+let PaigeThreeUK7 = new Queen("Paige Three", 7, 7, 7, 7, 7, 7, 7, "https://static.wikia.nocookie.net/logosrupaulsdragrace/images/3/3f/PaigeThreeDRUK7CastMug.jpg");
+let PastyUK7 = new Queen("Pasty", 7, 7, 7, 7, 7, 7, 7, "https://static.wikia.nocookie.net/logosrupaulsdragrace/images/b/bf/PastyDRUK7CastMug.jpg");
+let SallyTMUK7 = new Queen("Sally™", 7, 7, 7, 7, 7, 7, 7, "https://static.wikia.nocookie.net/logosrupaulsdragrace/images/5/56/Sally%E2%84%A2DRUK7CastMug.jpg");
+let SilllexaDictionUK7 = new Queen("Silllexa Diction", 7, 7, 7, 7, 7, 7, 7, "https://static.wikia.nocookie.net/logosrupaulsdragrace/images/c/cb/SilllexaDictionDRUK7CastMug.jpg");
+let TayrisMongardiUK7 = new Queen("Tayris Mongardi", 7, 7, 7, 7, 7, 7, 7, "https://static.wikia.nocookie.net/logosrupaulsdragrace/images/e/e9/TayrisMongardiDRUK7CastMug.jpg");
+let ViolaUK7 = new Queen("Viola", 7, 7, 7, 7, 7, 7, 7, "https://static.wikia.nocookie.net/logosrupaulsdragrace/images/7/7d/ViolaDRUK7CastMug.jpg");
 
 let UK7_Cast = [BonesUK7, BonnieAnnClydeUK7, CatrinFeelingsUK7, ChaiTGrandeUK7, ElleVosqueUK7, NyongbellaUK7, PaigeThreeUK7, PastyUK7, SallyTMUK7, SilllexaDictionUK7, TayrisMongardiUK7, ViolaUK7];
+
+// - ES 5 CAST - //
+let AlexandraDelRavalES5 = new Queen("", 7, 7, 7, 7, 7, 7, 7, "https://static.wikia.nocookie.net/logosrupaulsdragrace/images/a/aa/AlexandradelRavalDRES5CastMug.jpg/revision/latest/scale-to-width-down/105?cb=20250907190550");
+let DafneMuglerES5 = new Queen("", 7, 7, 7, 7, 7, 7, 7, "https://static.wikia.nocookie.net/logosrupaulsdragrace/images/6/65/DafneMuglerDRES5CastMug.jpg/revision/latest/scale-to-width-down/105?cb=20250907190622");
+let DenebolaMurnauES5 = new Queen("", 7, 7, 7, 7, 7, 7, 7, "https://static.wikia.nocookie.net/logosrupaulsdragrace/images/1/16/Den%C3%A9bolaMurnauDRES5CastMug.jpg/revision/latest/scale-to-width-down/105?cb=20250907190701");
+let EvaHarringtonES5 = new Queen("", 7, 7, 7, 7, 7, 7, 7, "https://static.wikia.nocookie.net/logosrupaulsdragrace/images/6/68/EvaHarringtonDRES5CastMug.jpg/revision/latest/scale-to-width-down/105?cb=20250907190759");
+let FerrxnES5 = new Queen("", 7, 7, 7, 7, 7, 7, 7, "https://static.wikia.nocookie.net/logosrupaulsdragrace/images/1/1c/FerrxnDRES5CastMug.jpg/revision/latest/scale-to-width-down/105?cb=20250907190827");
+let KrystalForeverES5 = new Queen("", 7, 7, 7, 7, 7, 7, 7, "https://static.wikia.nocookie.net/logosrupaulsdragrace/images/4/45/KrystalForeverDRES5CastMug.jpg/revision/latest/scale-to-width-down/105?cb=20250907190908");
+let LaEscandaloES5 = new Queen("", 7, 7, 7, 7, 7, 7, 7, "https://static.wikia.nocookie.net/logosrupaulsdragrace/images/c/cc/LaEsc%C3%A1ndaloDRES5CastMug.jpg/revision/latest/scale-to-width-down/105?cb=20250907191405");
+let LacaUdilaES5 = new Queen("", 7, 7, 7, 7, 7, 7, 7, "https://static.wikia.nocookie.net/logosrupaulsdragrace/images/a/ac/LacaUdillaDRES5CastMug.jpg/revision/latest/scale-to-width-down/105?cb=20250907190939");
+let MargaritaKalifataES5 = new Queen("", 7, 7, 7, 7, 7, 7, 7, "https://static.wikia.nocookie.net/logosrupaulsdragrace/images/e/e5/MargaritaKalifataDRES5CastMug.jpg/revision/latest/scale-to-width-down/105?cb=20250907191046");
+let NixES5 = new Queen("", 7, 7, 7, 7, 7, 7, 7, "https://static.wikia.nocookie.net/logosrupaulsdragrace/images/2/22/NixDRES5CastMug.jpg/revision/latest/scale-to-width-down/105?cb=20250907191126");
+let NoriES5 = new Queen("", 7, 7, 7, 7, 7, 7, 7, "https://static.wikia.nocookie.net/logosrupaulsdragrace/images/3/3e/NoriDRES5CastMug.jpg/revision/latest/scale-to-width-down/105?cb=20250907191153");
+let SatinGrecoES5 = new Queen("", 7, 7, 7, 7, 7, 7, 7, "https://static.wikia.nocookie.net/logosrupaulsdragrace/images/7/77/Sat%C3%ADnGrecoDRES5CastMug.jpg/revision/latest/scale-to-width-down/105?cb=20250907191448");
+
+let ES5_Cast = [AlexandraDelRavalES5, DafneMuglerES5, DenebolaMurnauES5, EvaHarringtonES5, FerrxnES5, KrystalForeverES5, LaEscandaloES5, LacaUdilaES5, MargaritaKalifataES5, NixES5, NoriES5, SatinGrecoES5];
 
 // - SEASON 17 STAT UPDATES //
 onya._actingStat = 14;
@@ -271,6 +287,31 @@ if (window.location.pathname.endsWith("predef.html")) {
                     style="background: linear-gradient(-10deg, rgba(247, 25, 154, 0.6) 15%, rgba(235, 13, 187, 0.6) 100%) 
                     center center / cover no-repeat, 
                     url('https://static.wikia.nocookie.net/logosrupaulsdragrace/images/2/22/RDRUK7.jpg');">
+                </div>
+            `;
+
+            ukSeasons.appendChild(newSeason);
+        }
+    }
+
+	// --- ES: Season 5 ---
+	const esDiv = Array.from(document.querySelectorAll("div.content-tab")).find(div =>
+        div.querySelector("h2 img[src*='SpainFlag']")
+    );
+
+    if (esDiv) {
+        const esSeasons = esDiv.querySelector(".content-seasons");
+
+        if (esSeasons) {
+            const newSeason = document.createElement("div");
+            newSeason.className = "content-season";
+            newSeason.innerHTML = `
+                <h3 class="content-season-title">ES Season 5</h3>
+                <button onclick="predefCast(ES5_Cast, 'regular', 'lftc', 'slayers-premiere')">Simulate</button>
+                <div class="content-season_overlay" aria-hidden="true" id="ukseason7" 
+                    style="background: linear-gradient(-10deg, rgba(247, 25, 154, 0.6) 15%, rgba(235, 13, 187, 0.6) 100%) 
+                    center center / cover no-repeat, 
+                    url('https://static.wikia.nocookie.net/logosrupaulsdragrace/images/0/09/DRES5.jpg');">
                 </div>
             `;
 
